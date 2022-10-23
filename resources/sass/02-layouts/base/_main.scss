@@ -1,0 +1,17 @@
+main{
+    padding: 40px 0;
+
+    @media only screen and (max-width:$breakpoint-tablet) {
+        padding: 20px;
+    }
+    h2{
+        margin-bottom: 20px;
+    }
+}
+
+#mainContent{
+    background-color: #fff;
+    border-top-right-radius: $size-border-radius-l;
+    //overflow: hidden;
+    padding-bottom: 30px;
+}

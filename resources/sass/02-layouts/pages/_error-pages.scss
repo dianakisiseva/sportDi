@@ -1,0 +1,25 @@
+.error-page {
+    margin: 50px auto;
+    max-width: 60%;
+    
+    &-body {
+        background-color: $color-light-green;
+        padding: 70px;
+        text-align: center;
+        border-bottom: 10px solid $color-green-primary;
+
+        .branding-logo {
+            margin-top: -120px;
+            margin-bottom: 0px;
+        }
+        
+        h2 {
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 1rem;;
+            margin-bottom: 30px;
+        }
+    }
+}

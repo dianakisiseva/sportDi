@@ -1,0 +1,59 @@
+h1 {
+    font-size: calc-rem(40px);
+    font-weight: bold;
+    letter-spacing: -0.4px;
+    line-height: get-line-height(40px, 46px);
+    color: $color-pure-black;
+  }
+  
+  h2 {
+    font-size: calc-rem(32px);
+    font-weight: 400;
+    letter-spacing: -0.53px;
+    line-height: get-line-height(32px, 32px);
+    color: $color-dark-grey;
+  }
+  
+  h3 {
+    font-size: calc-rem(14px);
+    font-weight: bold;
+    letter-spacing: 0.88px;
+    line-height: get-line-height(14px, 18px);
+    color: $color-dark-grey;
+    text-transform: uppercase;
+
+  }
+  
+  h4 {
+    font-size: calc-rem(20px);
+    font-weight: bold;
+    letter-spacing: 0.63px;
+    line-height: get-line-height(20px, 24px);
+    color: $color-pure-black;
+    
+    &.h4-xl {
+      font-size: calc-rem(40px);
+    }
+  }
+  
+  h5 {
+    font-size: calc-rem(26px);
+    font-weight: 500;
+    letter-spacing: -0.43px;
+    line-height: get-line-height(26px, 32px);
+    color: $color-green-primary;
+
+    &.h5-sm {
+      font-size: calc-rem(18px);
+      font-weight: 700;
+      line-height: get-line-height(18px, 22px);
+    }
+  }
+  
+  @for $i from 1 through 6 {
+    h#{$i} {
+      &.highlight{
+        color:blue;
+      }
+    }
+  }

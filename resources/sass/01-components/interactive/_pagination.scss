@@ -1,0 +1,77 @@
+%table-nav-buttons {
+    @extend %button;
+
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0 10px;
+    font-size: calc-rem(12px);
+    font-weight: 400;
+    background-color: #fff;
+    border: 1px solid $color-light-grey;
+    
+    &:disabled {
+        color: lighten($color-medium-grey, 20%);
+        background-color: $color-light-grey;
+    }
+
+    &:hover:not(:disabled) {
+        color: #fff;
+        background-color: $color-light-grey-1;
+    }
+}
+
+.pagination {
+    padding: 20px 0;
+    margin-top: 10px;
+
+    &-info {
+        font-size: calc-rem(14px);
+        text-align: right;
+    }
+
+    &-controllers {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin: 15px 0;
+    }
+
+    &-prev {
+        .page-button{
+            margin-left: 0;
+        }
+    }
+
+    &-next {
+        .page-button{
+            margin-right: 0;
+        }
+    }
+    
+    .page-button {
+        @extend %table-nav-buttons;
+
+        &--active {
+            color: #fff;
+            background-color: $color-green-primary;
+        }
+
+        &--prev,
+        &--next {
+            font-size: calc-rem(10px);
+        }
+    
+        &--prev {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.page-show-button {
+    @extend %table-nav-buttons;
+
+    &--active {
+        color: #fff;
+        background-color: $color-green-primary;
+    }
+}

@@ -1,0 +1,50 @@
+.list {
+    &-striped {
+        list-style: none;
+    }
+
+    &-file {
+        display: flex;
+        align-items: center;
+        padding: calc-rem(5px) calc-rem(10px);
+        border-bottom: 1px solid $color-pure-white;
+        
+        &:nth-child(odd) {
+            background-color: $color-green-background;
+        }
+
+        &:nth-child(even) {
+            background-color: rgba($color-green-background, .25);
+        }
+
+        &::before {
+            content: none !important;
+        }
+
+        &-name {
+            color: $color-medium-grey;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+
+            .icon-file {
+                color: $color-green-primary;
+            }
+        }
+
+        &-actions {
+            margin-left: auto;
+            
+            button {
+                margin-left: calc-rem(10px);
+            }
+
+            .btn-download {
+                transform: rotate(-90deg);
+                border-left: 2px solid $color-pure-black;
+                padding-left: 2px;
+                color: $color-pure-black;
+                font-size: 0.8em;
+            }
+        }
+    }
+}

@@ -1,0 +1,108 @@
+.ReactModal {
+    &__Overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.75);
+        z-index: 1000;
+
+        &-aside-overlay {
+            position: static;
+            background-color: transparent;
+        }
+    }
+
+    &__Content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        border: 0;
+        background: rgb(255, 255, 255);
+        border-radius: 4px;
+        outline: none;
+        padding: 50px 65px;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        max-width: 100%;
+        width: 900px;
+        // max-height: 90%;
+        box-shadow: 0 20px 80px 0 rgba(0,0,0,0.1);
+
+        &.modal_overflow_allowed {
+            overflow: auto;
+        }
+
+        &--Large {
+            width: 1350px;
+        }
+
+        &--Medium {
+            width: 900px;
+        }
+
+        &--Small {
+            width: 600px;
+        }
+
+        .hidden {
+            display:none
+        }
+
+    }  
+}
+
+.react-modal {
+    &-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 30px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid $color-light-grey-2;
+
+        &-title {
+            display: flex;
+            align-items: center;
+
+        }
+
+        &-title-icon {
+            margin-right: 15px;
+            margin-bottom: -2px;
+            width: 32px;
+            font-size: 1.5rem;
+
+            .icon-warning {
+                color: #f00;
+            }
+        }
+    }
+
+    &-body {
+        &-message {
+            font-weight: initial;
+            color: black;
+        }
+        &-warning {
+            background-color: $color-notification-warning;
+            border: 1px solid $color-notification-warning-border;
+            padding: 20px;
+            max-height: 300px;
+            overflow-y:auto;
+        }
+    }
+    
+    &-footer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 35px;
+
+        & > button {
+            margin-left: 16px;
+        }
+    }
+}

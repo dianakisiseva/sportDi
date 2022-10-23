@@ -1,0 +1,81 @@
+.dropdown-menu {
+    position: relative;
+    margin: 10px 35px 10px 10px;
+    cursor: pointer;
+    .dropdown-menu-label {
+        display: flex;
+        align-items: center;
+        padding: 6px;
+
+        & > span {
+            position: relative;
+            font-size: calc-rem(12px);
+            width: 100%;
+            font-weight: 700;
+            line-height: 18px;
+            text-transform: uppercase;
+
+            &::after {
+                content: '';
+                @include absolute-right-center;
+                right: -15px;
+                transform: translateY(-80%) rotate(-45deg);
+                width: 5px;
+                height: 5px;
+                border-left: 1px solid $color-green-primary;
+                border-bottom: 1px solid $color-green-primary;
+                @include transition(transform, .2s);
+            }
+        }
+    }
+
+    .dropdown-menu-list {
+        position: absolute;
+        width: 100%;
+        padding: 10px 6px 0px;
+        border-top: 1px solid transparent;
+        background-color: transparent;
+        padding: 6px;
+        z-index: 99;
+        @include transition((padding, background-color), .3s);
+
+        li {
+            height: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            @include transition(height, .3s);
+
+            &:hover {
+                color: $color-green-primary;
+            }
+
+            a {
+                display:block;
+                text-transform: uppercase;
+                font-size: calc-rem(12px);
+            }
+        }
+
+        &.menu-open {
+            border-color: $color-green-primary;
+            background-color: #fff;
+        
+            > li {
+                height: 22px;
+            }
+        }
+    }
+
+    &.menu-open {
+        .dropdown-menu-label {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+
+            & > span {
+                &::after {
+                    transform: translateY(-70%) rotate(45deg);
+                }
+            }
+        }
+    }
+}

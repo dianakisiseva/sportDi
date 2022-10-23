@@ -1,0 +1,93 @@
+// Background color
+@each $name, $color in ($colors) {
+    .bg-#{$name} {
+        background-color: $color;
+    }
+}
+
+// //Text color
+// @each $name, $color in ($colors-text) {
+//     .color-#{$name} {
+//         color: $color;
+//     }
+// }
+
+//Margin
+@each $size, $length in $spacers {
+  .m-#{$size} {
+    margin: $length !important;
+  }
+  .mv-#{$size} {
+    margin: $length 0 !important;
+  }
+  .mh-#{$size} {
+    margin: 0 $length !important;
+  }
+  .mt-#{$size}, .my-#{$size} {
+    margin-top: $length !important;
+  }
+  .ml-#{$size}, .mx-#{$size} {
+    margin-left: $length !important;
+  }
+  .mr-#{$size}, .mx-#{$size} {
+    margin-right: $length !important;
+  }
+  .mb-#{$size}, .my-#{$size} {
+    margin-bottom: $length !important;
+  }
+
+  //negative
+  .mt-n-#{$size}, .my-n-#{$size} {
+    margin-top: -$length !important;
+  }
+  .ml-n-#{$size}, .mx-n-#{$size} {
+    margin-left: -$length !important;
+  }
+  .mr-n-#{$size}, .mx-n-#{$size} {
+    margin-right: -$length !important;
+  }
+  .mb-n-#{$size}, .my-n-#{$size} {
+    margin-bottom: -$length !important;
+  }
+}
+
+//Margin special
+.m-auto {
+  margin: auto;
+}
+
+.mt-auto, .my-auto {
+  margin-top: auto;
+}
+
+.mb-auto, .my-auto {
+  margin-bottom: auto;
+}
+
+.ml-auto, .mx-auto {
+  margin-left: auto;
+}
+
+.mr-auto, .mx-auto {
+  margin-right: auto;
+}
+
+
+//Padding
+@each $size, $length in $spacers {
+  .p-#{$size} {
+    padding: $length;
+  }
+  .pt-#{$size}, .py-#{$size} {
+    padding-top: $length;
+  }
+  .pl-#{$size}, .px-#{$size} {
+    padding-left: $length;
+  }
+  .pr-#{$size}, .px-#{$size} {
+    padding-right: $length;
+  }
+  .pb-#{$size}, .py-#{$size} {
+    padding-bottom: $length;
+  }
+}

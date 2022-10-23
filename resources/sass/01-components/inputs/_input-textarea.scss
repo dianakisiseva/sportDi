@@ -1,0 +1,11 @@
+.form-textarea {
+    display: inline-flex;
+    position: relative;
+    
+}
+
+textarea {
+    min-height: 42px;
+    max-height: 200px;
+    resize: vertical;
+}

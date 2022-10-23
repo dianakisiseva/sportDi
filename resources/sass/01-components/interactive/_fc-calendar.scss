@@ -1,0 +1,127 @@
+.fc-theme-standard.fc {
+    .fc-toolbar-title {
+        font-size: calc-rem(20px);
+        font-weight: 700;
+        letter-spacing: 0.63px;
+    }
+
+    .fc-button-primary {
+        background-color: $color-green-background;
+        border: 1px solid $color-green-primary-light;
+        color: $color-medium-grey;
+        font-weight: 700;
+        border-radius: 0;
+        text-transform: capitalize;
+        padding: 0.45em 0.65em;
+
+        &.fc-button-primary:not(:disabled).fc-button-active,
+        &.fc-today-button{
+            background-color: $color-green-primary;
+            color: #fff;
+            border: 1px solid $color-green-primary;
+    
+            &:not(:disabled):hover {
+                background-color: $color-green-primary-light;
+                color: $color-medium-grey;
+            }
+
+            &:disabled:hover {
+                color: #fff;
+                background-color: $color-green-primary;
+            }
+        }
+    
+        &:hover {
+            color: $color-green-primary;
+            border: 1px solid $color-green-primary;
+            background-color: $color-green-background;
+        }
+    
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    table {
+        td,
+        th {
+            font-size: calc-rem(12px);
+            font-weight: 500;
+            line-height: 14px;
+            border: none;
+        }
+
+        td {
+            color: $color-medium-grey;
+        }
+    }
+
+    .fc-col-header {
+        th {
+            padding: 0.85rem 0.5rem;
+            background-color: $color-medium-grey;
+            color: #fff;
+        }
+    }
+
+    .fc-timegrid {
+        &-slots {
+            tr:nth-child(4n - 3),
+            tr:nth-child(4n - 2) {
+                background-color: $color-light-grey;
+            }
+
+            .fc-timegrid-slot-label-cushion {
+                padding: 10px;
+            }
+        }
+
+        &-cols {
+            z-index: 5;
+
+            & > table {
+                border-right-style: initial;
+                border-bottom-style: initial;
+            }
+
+            .fc-timegrid-col {
+                border-right: 1px solid $color-light-grey-2;
+            }
+        }
+    }
+
+    .fc-daygrid {
+        &-day {
+            border: 1px solid $color-light-grey-2;
+
+            &-number {
+                color: $color-green-primary-light;
+
+                &:hover {
+                    color: $color-green-primary;
+                }
+            }
+        }
+
+        .fc-scrollgrid-sync-table {
+            border-right-style: initial;
+            border-bottom-style: initial;
+        }
+    }
+
+    .fc-timegrid-col,
+    .fc-daygrid-day {
+        &.fc-day-today {
+            background-color: rgba($color-green-primary, 0.2) ;
+        }
+    }
+
+    &.fc-direction-ltr,
+    &.fc-direction-rtl {
+        .fc-timegrid-col-events,
+        .fc-daygrid-event.fc-event-end, 
+        .fc-daygrid-event.fc-event-start {
+            margin: 0 3px;
+        }
+    }
+}

@@ -1,0 +1,76 @@
+.dropzone {
+    border: 2px dashed transparent;
+    border-radius: $size-border-radius-s;
+    outline: none;
+    
+    @include transition(border, .25s);
+    @include dropzoneTemplate(&);
+}
+
+.upload-image, .upload-file {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .dropzone {
+        &:hover {
+            border-color: $color-green-primary;
+        }
+
+        &-placeholder {
+            padding: 25px;
+            flex: 1;
+
+            p {
+                font: 500 calc-rem(24px) $font-klima;
+            }
+        }
+    }
+    button{
+        margin-top: 10px;
+    }
+}
+
+.ReactModal__Content--Large {
+    .dropzone {
+        margin-right: 0;
+    }
+}
+// .input-wrapper
+// {
+//     &-file{
+//         input[type="file"]#document{
+//             max-height: max-content!important;
+//             display: none;
+//         }
+//         label{
+//             @extend %button;
+//             background-color:$color-green-primary;
+//             color: white;
+//             cursor: pointer;
+//             &:hover {
+//                 background-color: $color-pure-white;
+//                 border: 1px solid $color-dark-grey;
+//                 color: $color-dark-grey;
+//             }
+//         }
+//     }
+// }
+
+input[type="file"]#document{
+    max-height: max-content!important;
+    padding:2rem;
+}
+
+// {
+//     label: t("repository.label.upload-file"),
+//     element: "file-profile-edit",
+//     type: "file",
+//     name: "document",
+//     rule: "required",
+//     show_username: false,
+//     wrapper: {
+//         element: "div",
+//         class: "input-element input-width-50"
+//     }
+// },

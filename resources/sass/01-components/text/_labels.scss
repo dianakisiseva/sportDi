@@ -1,0 +1,12 @@
+//GENERAL STYLE FOR LABELS
+label {
+    margin-bottom: 14px;
+    display: inline-block;
+    color: $color-dark-grey;
+    font: 500 1rem $font-klima;
+    letter-spacing: 0.5px;
+}
+
+.no-label {
+    display: none;
+}

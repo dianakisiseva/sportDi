@@ -1,0 +1,18 @@
+.profile {
+    &-header {
+        border-bottom: 1px solid $color-light-grey-2;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+
+        @include dropzoneTemplate(&);
+    }
+
+
+    &-body {
+        .form-group-flex {
+            p {
+                font-size: calc-rem(20px);
+            }
+        }
+    }
+}

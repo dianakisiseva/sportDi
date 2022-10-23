@@ -1,0 +1,91 @@
+.branding {
+    border-bottom: 10px solid $color-green-primary;
+    margin-top: -60px;
+
+    & > .container {
+        display: flex;
+        align-items: center;
+    }
+
+    &-logo {
+        display: block;
+        max-width: 208px;
+        margin: 0;
+    }
+
+    h1 {
+        color: #fff;
+        margin-left: 60px;
+
+        @media only screen and (max-width:$breakpoint-tablet) {
+            font-size: calc-rem(32px);
+        }
+    }
+}
+
+.user-options {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 5px 0;
+
+    & > div,
+    & > ul,
+    a {
+        color: $color-medium-grey;
+        font-size: calc-rem(14px);
+
+        &:hover {
+            color: $color-green-primary;
+        }
+    }
+
+
+    &-profile {
+        margin: 10px;
+
+        .icon-profile {
+            margin-right: 5px;
+        }
+    }
+
+    &-quicklinks {
+        display: flex;
+        font-size: calc-rem(14px);
+        color: $color-medium-grey;
+        margin: 10px 20px 10px 10px;
+
+        li:first-child {
+            border-right: 1px solid $color-green-primary;
+            margin-right: 20px;
+            padding-right: 20px;
+        }
+    }
+
+    .logout {
+        color: $color-medium-grey;
+        &:hover {
+            color: $color-green-primary;
+        }
+    }
+}
+
+.prime-header-full {
+    .user-options {
+        margin: 16px 0;
+    }
+
+    .branding {
+        background: url("../../../assets/media/images/header-visual.jpg") no-repeat center;
+        background-size: cover;
+        padding: 5px;
+        margin-top: 0;
+
+        &-logo {
+            margin-bottom: 30px;
+            margin-top: -50px;
+            max-width: 120px;
+            height: auto;
+        }
+    }
+}

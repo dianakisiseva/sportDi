@@ -1,0 +1,19 @@
+//// external
+//@import '~react-datetime/css/react-datetime.css';
+
+// 00-config scss partials
+@import "00-config/config";
+
+// 01-components partials
+@import "01-components/component";
+
+// 02-layouts partials
+@import "02-layouts/layout";
+
+
+//// react-dates
+//@import '~react-dates/lib/css/_datepicker.css';
+
+.pointer {
+    cursor: pointer
+}

@@ -1,0 +1,94 @@
+*::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-family: $font-raleway;
+}
+
+*:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-family: $font-raleway;
+}
+
+*::-ms-input-placeholder { /* Microsoft Edge */
+    font-family: $font-raleway;
+}
+
+p {
+    font: 300 calc-rem(14px) $font-klima;
+    line-height: get-line-height(20px, 28px);
+    letter-spacing: 0.63px;
+    color: $color-medium-grey;
+}
+
+small {
+    font: 500 calc-rem(10px) $font-raleway;
+
+    &.small-red{
+        color: $color-red-primary;
+    }
+
+    &.small-gray {
+        color: $color-dark-grey;
+    }
+}
+
+// Text color
+@each $name,
+$color in ($colors-text) {
+
+    .text-#{$name} {
+        color: $color;
+    }
+}
+
+.text {
+    &-plain {
+        color: $color-dark-grey
+    }
+
+    &-success {
+        color: $color-green-primary;
+    }
+
+    &-error {
+        color: $color-red-primary;
+    }
+
+    &-ellipsis{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    &-strong {
+        padding: 10px;
+        font-weight: bold;
+    }
+    &-prewrap {
+        white-space: pre-wrap;
+    }
+    &-background {
+        &-plain {
+            background-color: $color-dark-grey;
+            color: white
+        }
+        &-success {
+            color: $color-green-primary;
+            color: white
+        }
+
+        &-error {
+            color: $color-red-primary;
+            color: white
+        }
+
+    }
+}
+
+.input-error-message {
+    margin: 5px 0;
+    font-size: calc-rem(12px);
+    color: $color-red-primary;
+
+    a {
+        font-size: calc-rem(12px);
+        color: $color-red-primary;
+        text-decoration: underline;
+    }
+}

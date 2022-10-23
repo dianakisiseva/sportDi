@@ -1,0 +1,37 @@
+/* Popover */
+.Popover {
+    z-index: 9999;
+}
+
+.Popover-body {
+    @extend .block;
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    max-width: 400px;
+    padding: 15px 20px;
+    border-radius: 0 0 $size-border-radius $size-border-radius;
+    border-top: 8px solid $color-green-primary;
+
+    h3{
+        color: $color-green-primary;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid lighten($color-green-primary, 10%);
+    }
+
+    .form-footer{
+        button{
+            flex: 1;
+            min-width: 0;
+        }
+
+        .btn-hollow{
+            margin-left: 0;
+        }
+    }
+}
+
+.Popover-tipShape {
+    fill: #fff;
+}

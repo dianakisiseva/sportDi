@@ -1,0 +1,19 @@
+@import "base/body";
+@import "base/header";
+@import "base/main";
+@import "base/aside";
+@import "base/footer";
+
+@import "forms/form";
+
+@import "menus/menu-dropdown";
+
+@import "content/filters";
+@import "content/svg-component";
+
+@import "pages/dashboard";
+@import "pages/error-pages";
+@import "pages/profile";
+@import "pages/repository";
+@import "pages/mail-templates";
+@import "pages/profitability";

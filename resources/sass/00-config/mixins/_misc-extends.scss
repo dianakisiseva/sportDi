@@ -1,0 +1,86 @@
+//INPUT FIELDS
+%radio-checkbox {
+    .input-wrapper {
+        display: flex;
+        align-items: center;
+        min-height: 46px;
+    }
+    z-index: 0;
+
+    label {
+        position: relative;
+        padding-left: 43px;
+        margin: 0;
+        color: $color-dark-grey;
+        font-weight: 500;
+        font-size: 1rem;
+        cursor: pointer;
+
+        &::before {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            width: 10px;
+            height: 5px;
+            transition: transform .4s;
+        }
+
+        &::after {
+            content: "";
+            @include absolute-left-center;
+            border-radius: $size-border-radius-xs;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border: 2px solid $color-green-primary;
+            @include transition(all, .2s);
+        }
+    }
+
+    input[type=radio],
+    input[type=checkbox] {
+        display: none;
+        opacity: 0;
+
+        &[disabled] + label {
+            cursor: not-allowed;
+            color: $color-light-grey-1;
+
+            &::after {
+                border-color: $color-light-grey-1;
+            }
+        }
+    }
+}
+
+//TEXT ELLIPSIS
+%ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//SCROLLBARS
+%scrollbar {
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+        border-radius: $size-border-radius;
+        background-color: $color-light-grey;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: $size-border-radius;
+        background-color: $color-green-primary;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $color-red-primary;
+    }
+
+    &::-webkit-scrollbar-thumb:window-inactive {
+        background-color: $color-light-grey;
+    }
+}

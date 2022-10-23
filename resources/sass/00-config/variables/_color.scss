@@ -1,0 +1,50 @@
+// COLORS
+$color-green-primary:               #33BAB3;
+$color-green-primary-light:         #A8DEDC;
+$color-green-secondary:             #33BA78;
+$color-green-background:            #ECF8F7;
+$color-dark-grey:                   #3A4049;
+$color-medium-grey:                 #4D535B;
+$color-light-grey:                  #EAF1F4;
+$color-light-grey-1:                #BDC4CD;
+$color-light-grey-2:                #CDD3D9;
+$color-light-green:                 #090a0a;
+$color-red-primary:                 #B20000;
+$color-red-secondary:               #7F0000;
+$color-pure-white:                  #fff;
+$color-pure-black:                  #000;
+$color-text-message:                #60BC10;
+
+// TAGS COLOR       
+$color-tags-green:                  #8FC6C4;
+$color-tags-blue:                   #8FAFC6;
+$color-tags-brown:                  #C69F8F;
+$color-tags-purple:                 #A88FC6;
+
+//NOTIFICATION MESSAGE COLORS
+$color-notification-warning:        #FFF3E6;
+$color-notification-warning-border: #E7C39D;
+
+// COLORS FOR UTILITES BACKGROUND
+$colors: (
+  green-primary:      $color-green-primary,
+  dark-grey:          $color-dark-grey,
+  medium-grey:        $color-medium-grey,
+  light-grey:         $color-light-grey,
+  red-primary:        $color-red-primary,
+  red-secondary:      $color-red-secondary,
+);
+
+// COLORS FOR UTILITES TEXT
+$colors-text: (
+  green-primary:      $color-green-primary,
+  green-secondary:    $color-green-secondary,
+  dark-grey:          $color-dark-grey,
+  medium-grey:        $color-medium-grey,
+  light-grey:         $color-light-grey,
+  red-primary:        $color-red-primary,
+  red-secondary:      $color-red-secondary,
+  white:              $color-pure-white,
+  black:              $color-pure-black,
+  text-message:       $color-text-message,
+);

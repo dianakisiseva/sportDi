@@ -1,0 +1,92 @@
+.select-input,
+.select-tag-input {
+    label {
+        display: block;
+    }
+
+    input{
+        margin-bottom: 0;
+    }
+}
+
+.select-input {
+    select{
+        margin-bottom: 0;
+        width: 100%;
+    }
+}
+
+.select-custom-input {    
+    @include customSelect('.select');
+}
+
+.tag-select__menu {
+    &#{&} {
+        margin-bottom: 50px;
+    }
+}
+
+.select__menu {
+    z-index: 99;
+}
+
+.select-menu {
+    top: 100%;
+    background-color: hsl(0,0%,100%);
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px hsla(0,0%,0%,0.1),0 4px 11px hsla(0,0%,0%,0.1);
+    margin-bottom: 8px;
+    margin-top: 8px;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+
+    .menu-list {
+        max-height: 300px;
+        overflow-y: auto;
+        padding-bottom: 4px;
+        padding-top: 4px;
+        position: relative;
+        .option {
+            background-color: transparent;
+            color: inherit;
+            cursor: default;
+            display: block;
+            font-size: inherit;
+            padding: 8px 12px;
+            width: 100%;
+            &:hover{
+                background-color: #DEEBFF;  
+            }
+
+            &.active {
+                background-color: #2684FF;
+                color: white;
+            }
+        }
+    }
+ 
+}
+
+.input-mock-dropdown {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        background-color: $color-pure-white;
+        height: calc(100% - 4px);
+        width: calc-rem(40px);
+        right: 2px;
+        top: 2px;
+    }
+
+    &-arrow.svg-inline {
+        position: absolute;
+        right: calc-rem(10px);
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: calc-rem(20px);
+        color: $color-green-primary;
+    }
+}

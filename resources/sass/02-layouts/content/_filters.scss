@@ -1,0 +1,90 @@
+
+.filters-container {
+    display: flex;
+    align-items: flex-start;
+
+    .join-filters-wrap {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        flex: 1;
+        margin: 30px -5px 0;
+    }
+
+    .btn-reset {
+        margin: 0 5px 20px;
+        margin-left: auto;
+        width: calc(25% - 10px);
+    }
+
+    @media only screen and (max-width:$breakpoint-tablet) {
+        .btn-reset {
+            width: calc(50% - 10px);
+        }
+    }
+}
+
+.custom-filter{
+    margin: 0 5px 20px;
+
+    &-filling {
+        flex: 1;
+    }
+
+    &-quarter {
+        width: calc(25% - 10px);
+    }
+    &-third {
+        width: calc(33% - 10px);
+    }
+    &-half {
+        width: calc(50% - 10px);
+    }
+
+    &-75 {
+        width: calc(75% - 10px);
+    }
+
+    &-full {
+        width: calc(100% - 10px);
+    }
+
+    .custom-react-select__input {
+        input {
+            width: auto;
+            min-height: 0 !important;
+        }
+    }
+
+    @include customSelect('.custom-react-select');
+
+    &#filter-created_at,
+    &#filter-event {
+        flex: 0 1 48%;
+    }
+
+    &#filter-event {
+        margin-left: auto;
+    }
+
+    &#filter-severity,
+    &#filter-comment {
+        flex: 1 0 100%;
+    }
+
+    .input-wrapper {
+        display:flex;
+        justify-content: center;
+        min-height: unset;
+    }
+
+    @media only screen and (max-width:$breakpoint-tablet) {
+        &-quarter {
+            width: calc(50% - 10px)!important;
+        }
+
+        .input-wrapper {
+            justify-content: flex-start;
+        }
+    }
+}

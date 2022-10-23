@@ -1,0 +1,31 @@
+.skills-rating {
+    &-wrapper {
+        display: flex;
+        margin: 2px 0;
+    }
+
+    &-stars {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+
+        li {
+            margin-left: 10px;
+        }
+
+        input {
+            display: none;
+        }
+
+        label {
+            margin: 0;
+            color: $color-green-primary;
+            font-size: 1.3rem;
+            cursor: pointer;
+
+            .svg-inline {
+                vertical-align: 0;
+            }
+        }
+    }
+}

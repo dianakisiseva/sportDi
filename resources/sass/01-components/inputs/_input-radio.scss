@@ -1,0 +1,22 @@
+.input-radio {
+    @extend %radio-checkbox;
+
+    input[type=radio] + label {
+        &::before{
+            transform: translateY(-50%) scale(0,0);
+            top: 50%;
+            left: 5px;
+            width: 12px;
+            height: 12px;
+            background-color: $color-green-primary;
+        }
+    }
+
+    input[type=radio] {
+        min-width: initial;
+
+        &:checked +label::before {
+            transform: translateY(-50%) scale(1,1);
+        }
+    }
+}

@@ -1,0 +1,54 @@
+.global-profitability {
+    max-width:100%;
+    background-color: #EAF1F4;
+    padding: 0.625rem 1.5625rem;
+
+    .global-profitability-title {
+        padding: 0.9375rem 0;
+        border-bottom: 1px solid $color-light-grey-2;
+        text-transform: uppercase;
+        h4 {
+            color: $color-green-primary;
+            margin: 0 auto;
+        }
+    }
+
+    .global-profitability-content {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 0.9375rem 0;
+        border-bottom: 1px solid $color-light-grey-2;
+
+        .global-profitability-item {
+            padding: 0.9375rem 0;
+        }
+    }
+
+    .global-profitability-percentage {
+        padding: 0.9375rem 0;
+    }
+}
+
+.specific-profitability {
+    &-container {
+        display: flex;
+        align-items: center;
+        padding-bottom: calc-rem(30px);
+    }
+    
+    &-container,
+    &-header {
+        border-bottom: 1px solid $color-light-grey-2;
+
+        &-wrapper {
+            margin-right: calc-rem(40px);
+        }
+    
+        p {
+            font-weight: 500;
+            margin: calc-rem(10px) 0;
+        }
+    }
+}

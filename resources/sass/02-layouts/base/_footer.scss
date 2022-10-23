@@ -1,0 +1,7 @@
+.footer{
+    @include absolute-bottom-center();
+    margin-left:-64px;
+    border-top: 1px solid $color-light-grey-2;
+    padding-top: 10px;
+    font-size: calc-rem(12px)!important;
+}

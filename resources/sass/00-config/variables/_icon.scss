@@ -1,0 +1,17 @@
+// ICONS
+$icon-calendar: url('../../../assets/media/icons/icon-calendar.svg');
+$icon-top-orange: url('../../../assets/media/icons/icon-top-orange.svg');
+$icon-alert: url('../../../assets/media/icons/icon-alert.svg');
+
+//VARIOUS
+$profile-placeholder: url('../../../assets/media/various/profile-placeholder.svg');
+
+$data-svg-prefix: 'data:image/svg+xml;utf-8,';
+
+$icons: (
+    'chevron-down': '<svg width="17px" height="11px" viewBox="0 0 17 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Design-System" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-807.000000, -1267.000000)" fill="%%COLOR%%" fill-rule="nonzero" id="Arrows"><g transform="translate(768.000000, 1184.000000)"><polygon id="Arrows/arrow-dropdown" points="47.4853333 89.6 54.0853333 83 55.9706667 84.8853333 47.4853333 93.3706667 39 84.8853333 40.8853333 83"></polygon></g></g></g></svg>',
+    'check': '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%%COLOR%%" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>',
+    'icon-pager': '<svg width="7px" height="9px" viewBox="0 0 7 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Design-System" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-845.000000, -1268.000000)" fill="%%COLOR%%" id="Arrows"><g transform="translate(768.000000, 1184.000000)"><g id="Arrows/arrow-pager" transform="translate(77.000000, 84.000000)"><polygon id="Path-2" points="0 0 0 9 7 4.5"></polygon></g></g></g></g></svg>',
+    'icon-star-filled': '<svg width="23px" height="22px" viewBox="0 0 23 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Design-System" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-768.000000, -854.000000)" fill="%%COLOR%%" fill-rule="nonzero" id="Icons"><g transform="translate(768.000000, 784.000000)"><polygon id="Icons/icon-star-filled" points="11.413 87.76 4.36 91.708 5.935 83.78 -3.55271368e-15 78.292 8.027 77.34 11.413 70 14.799 77.34 22.826 78.292 16.891 83.78 18.466 91.708"></polygon></g></g></g></svg>',
+    'icon-star': '<svg width="24px" height="22px" viewBox="0 0 24 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Design-System" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-806.000000, -854.000000)" fill="%%COLOR%%" fill-rule="nonzero" id="Icons"><g transform="translate(768.000000, 784.000000)"><path d="M50.239,87.76 L43.186,91.708 L44.761,83.78 L38.826,78.292 L46.853,77.34 L50.239,70 L53.625,77.34 L61.652,78.292 L55.717,83.78 L57.292,91.708 L50.239,87.76 Z M50.239,85.468 L54.486,87.845 L53.537,83.072 L57.11,79.767 L52.277,79.194 L50.239,74.775 L48.201,79.195 L43.368,79.767 L46.941,83.072 L45.992,87.845 L50.239,85.468 Z" id="Icons/icon-star"></path></g></g></g></svg>'
+);

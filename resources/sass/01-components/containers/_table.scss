@@ -1,0 +1,38 @@
+
+.invoice-items-table {
+    td {
+        padding: 10px
+    }
+}
+
+.form-group-flex .billing-summary,
+.billing-summary {
+    margin: calc-rem(20px) 0 calc-rem(50px);
+
+    &-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid $color-light-grey-2;
+        padding: calc-rem(15px) calc-rem(15px);
+
+        &:last-child {
+            border-bottom: 1px solid $color-light-grey-2;
+        }
+
+        h3 {
+            font-size: calc-rem(16px);
+            color: $color-medium-grey;
+            margin: 0;
+            width: auto;
+        }
+
+        p {
+            font-size: calc-rem(16px) !important;
+            font-weight: bold;
+            letter-spacing: 0.88px;
+            line-height: get-line-height(14px, 18px);
+            color: #33BAB3;
+        }
+    }
+}

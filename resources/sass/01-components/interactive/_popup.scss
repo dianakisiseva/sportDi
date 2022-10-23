@@ -1,0 +1,56 @@
+// .dealer-locator-widget {
+//     .popup-pin {
+//         background: white;
+//         padding: 10px;
+//         border-radius: 5px;
+//         max-width: 370px;
+//         min-width: 320px;
+//         width: 100%;
+//         box-shadow: 0 5px 20px 0 rgba(0,0,0,0.25);
+
+//         &:after {
+//             position: absolute;
+//             content: '';
+//             width: 0px;
+//             height: 0px;
+//             border-left: 20px solid transparent;
+//             border-right: 20px solid transparent;
+//             border-top: 20px solid #fff;
+//             top: 100%;
+//             left: 50%;
+//             transform: translateX(-50%);
+//         }
+
+//         h3 {
+//             font-size: 18px;
+//             font-family: $font-bold;
+//             line-height: 26px;
+//             padding-bottom: 10px;
+//             color: black;
+//         }
+
+//         .dealer-details-info {
+//             padding-bottom: 10px;
+//         }
+
+// 	    .dealer-details-btn-calc {
+// 	        padding-bottom: 0;
+//         }
+//     }
+
+//     .gm-style-iw, .gm-style-iw-d {
+//         max-width: 370px !important;
+//         width: 100%;
+//     }
+
+//     .gm-ui-hover-effect {
+//         top: -5px !important;
+//         right: 10px !important;
+//         opacity: .3;
+//         img {
+//             width: 30px !important;
+//             height: 30px !important;
+//         }
+//     }
+
+// }

@@ -1,0 +1,179 @@
+@function calc-rem($size) {
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+  }
+  
+  @function get-line-height($font-size, $line-height) {
+    @return $line-height / $font-size;
+  }
+  
+  
+  //Checking validation for container and breakpoint
+  @mixin _assert-ascending($map, $map-name) {
+    $prev-key: null;
+    $prev-num: null;
+  
+    @each $key,
+    $num in $map {
+      @if $prev-num==null {
+        // Do nothing
+      }
+  
+      @else if not comparable($prev-num, $num) {
+        @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+      }
+  
+      @else if $prev-num>=$num {
+        @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+      }
+  
+      $prev-key: $key;
+      $prev-num: $num;
+    }
+  }
+  
+  //Checking breakpoint must start from zero
+  @mixin _assert-starts-at-zero($map) {
+    $values: map-values($map);
+    $first-value: nth($values, 1);
+  
+    @if $first-value !=0 {
+      @warn "First breakpoint in `$grid-breakpoints` must start at 0, but starts at #{$first-value}.";
+    }
+  }
+  
+  @function str-replace( $string, $search, $replace: '' ) {
+  
+    $index: str-index( $string, $search );
+  
+    @if $index {
+      @return str-slice( $string, 1, $index - 1 ) + $replace + str-replace( str-slice( $string, $index + str-length( $search ) ), $search, $replace);
+    }
+  
+    @return $string;
+  }
+  
+  @function get-icon( $icon, $color: #fff ) {
+  
+    $icon:        map-get( $icons, $icon );
+    $placeholder: '%%COLOR%%';
+  
+    $data-uri: str-replace( url( $data-svg-prefix + $icon ), $placeholder, $color );
+  
+    @return str-replace( $data-uri, '#', '%23' );
+  }
+  
+// CENTERING
+
+@mixin absolute-center-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin absolute-right-center {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin absolute-left-center {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+@mixin absolute-bottom-center{
+  position: absolute;
+  left: 50%;
+  bottom: 0%;
+  transform: translateY(-50%);
+}
+
+// TRANSITION
+
+@mixin transition($property, $interval, $easing: ease-in-out, $delay: 0s) {
+    transition-property: $property;
+    transition-duration: $interval;
+    transition-timing-function: $easing;
+    transition-delay:$delay;
+}
+
+// SELECT ELEMENT STYLE
+@mixin customSelect($class-prefix) {
+    #{$class-prefix}__control {
+        min-height: 50px;
+        border-radius: 0;
+        border: 2px solid $color-light-grey-2;
+        background-color: #fff;
+        font: 400 1rem $font-klima;
+        color: $color-dark-grey;
+    }
+
+    #{$class-prefix}__value-container {
+        padding: 0 1.5rem;
+    }
+
+    #{$class-prefix}__indicator-separator {
+        display: none;
+    }
+
+    #{$class-prefix}__dropdown-indicator {
+        color: $color-green-primary;
+    }
+
+    #{$class-prefix}__placeholder {
+        color: $color-light-grey-1;
+    }
+
+    #{$class-prefix}__input {
+      margin: -6px -3px;
+    }
+}
+
+// Dropzone style template
+@mixin dropzoneTemplate($class-prefix) {
+  #{$class-prefix}-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+  #{$class-prefix}-wrapper-justified{
+    @extend #{$class-prefix}-wrapper;
+    justify-content: center;
+  }
+
+  #{$class-prefix}-preview {
+      background-color: $color-light-grey;
+      background-size: auto 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      outline: none;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      &-small {
+        width: 100px;
+        height: 100px
+      }
+  }
+
+  #{$class-prefix}-placeholder {
+      margin-left: 30px;
+      padding: 25px;
+
+      h2,
+      h4 {
+          color: $color-medium-grey;
+          font: 500 calc-rem(24px) $font-raleway;
+      }
+
+      h2 {
+          margin-bottom: 20px;
+          font-size: calc-rem(46px);
+      }
+  }
+}

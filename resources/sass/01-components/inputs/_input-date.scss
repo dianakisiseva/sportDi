@@ -1,0 +1,233 @@
+
+/*!
+ * https://github.com/arqex/react-datetime
+ */
+
+ .rdtPicker {
+     color:$color-dark-grey
+ }
+
+.rdtPicker td.rdtToday:before {
+border-bottom: 7px solid $color-green-primary;
+}
+.rdtPicker td.rdtActive,
+.rdtPicker td.rdtActive:hover {
+background-color: $color-green-primary;
+}
+
+.rdtPicker td, .rdtPicker th {
+    padding: 0.5em 1em;
+}
+
+.DateRangePicker {
+    width:100%;
+    .DateRangePickerInput {
+        border: 2px solid $color-light-grey-2;
+        border-radius: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        
+        .DateRangePickerInput_arrow{
+            display:flex;
+            align-items: center;
+        }
+        .DateInput {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            .DateInput_input{
+                font: 400 1rem $font-klima;
+                padding: 2px 0.25rem;
+                margin: 10px 0;
+                max-width: 100px;
+                &::placeholder {
+                    color: $color-light-grey-1
+                }
+                &__focused {
+                    border: none;
+                    border-bottom: 2px solid $color-green-primary
+                }
+            }
+        }
+        
+    }
+}
+
+// react-dates (not currently used)
+// .SingleDatePicker {
+//     display: block;
+// }
+
+// .SingleDatePickerInput{
+//     display: block;
+
+//     &__withBorder{
+//         border: 0;
+//         border-radius: 0;
+//     }
+
+//     .DateInput{
+//         width: 100%;
+//     }
+
+//     &_calendarIcon {
+//         position: absolute;
+//         color: $color-green-primary;
+//         margin: 0;
+//         right: 5px;
+//         top: 50%;
+//         transform: translateY(-50%);
+//         z-index: 10;
+//     }
+// }
+
+// .SingleDatePicker_picker{
+//     z-index: 10;
+// }
+
+// .DateInput_input {
+//     font: 400 1rem $font-klima;
+//     padding: 1rem 1.5rem;
+//     color: $color-dark-grey;
+//     border: 2px solid $color-light-grey-2;
+
+//     // &:focus {
+//     //     border: 0;
+//     // }
+
+//     &__focused {
+//         border-color: $color-green-primary;
+//         // background-color: rgba($color-green-primary, .1);
+//     }
+// }
+
+// .CalendarDay__default {
+//     border: 1px solid #e4e7e7;
+//     color: $color-medium-grey;
+//     background: #fff;
+
+//     &:hover{
+//         background: lighten($color-green-primary, 30%);
+//         border-color: lighten($color-green-primary, 30%);
+//         color: inherit;
+//     }
+// }
+
+// .CalendarDay__blocked_out_of_range,
+// .CalendarDay__blocked_out_of_range:hover {
+//     border: 1px solid #e4e7e7;
+//     color: $color-medium-grey;
+//     background: #f7f7f7;
+// }
+
+// // Will edit selected date or the endpoints of a range of dates
+// .CalendarDay__selected {
+//     background: $color-green-primary;
+//     border: 1px solid $color-green-primary;
+//     color: white;
+// }
+
+// // Will edit when hovered over. _span style also has this property
+// .CalendarDay__selected:hover {
+//     background: darken($color-green-primary, 10%);
+//     border: 1px solid darken($color-green-primary, 10%);
+//     color: white;
+// }
+
+// .CalendarDay__selected_span {
+//     background: lighten($color-green-primary, 40%);
+// }
+
+// // Will edit when the second date (end date) in a range of dates
+// // is not yet selected. Edits the dates between your mouse and said date
+// .CalendarDay__hovered_span:hover,
+// .CalendarDay__hovered_span {
+//     background: lighten($color-green-primary, 40%);
+// }
+
+ // DATE RAGE PICKER
+ //.DateRangePicker{
+ //    width: 100%;
+ //
+ //    .DateRangePickerInput{
+ //        display: flex;
+ //        align-items: center;
+ //        border: none;
+ //        justify-content: space-between;
+ //        width: 100%;
+ //        padding: 0;
+ //
+ //    }
+ //    .date-picker-range{
+ //        padding: 10px 22px 22px;
+ //
+ //        .btn-tertiary {
+ //            min-width: unset;
+ //            margin-right: 10px;
+ //        }
+ //    }
+ //
+ //    .DateInput{
+ //        width: initial;
+ //        background-color: transparent;
+ //
+ //        &::after {
+ //            content: "";
+ //            // background: $icon-calendar no-repeat center;
+ //            background-size: contain;
+ //            @include absolute-right-center;
+ //            right: 10px;
+ //            width: 20px;
+ //            height: 20px;
+ //        }
+ //    }
+ //
+ //    .DateRangePickerInput_arrow{
+ //        margin: 0 5px;
+ //    }
+ //
+ //    .DateInput_input {
+ //        background-color: transparent;
+ //        padding: 11px 5px;
+ //        max-height: none;
+ //
+ //        &::placeholder {
+ //            color: $color-light-grey-1;
+ //            font: 600 1rem $font-klima;
+ //        }
+ //    }
+ //
+ //    .DateRangePickerInput_clearDates{
+ //        display: flex;
+ //        align-items: center;
+ //        position: static;
+ //        transform: none;
+ //        margin: 0;
+ //        opacity: 1;
+ //        @include transition((opacity, margin-right), .2s);
+ //
+ //        &__hide{
+ //            margin-right: -40px;
+ //            opacity: 0;
+ //            visibility: unset;
+ //            pointer-events: none;
+ //        }
+ //
+ //        &_default:focus,
+ //        &_default:hover{
+ //            background: transparent;
+ //            border-radius: unset;
+ //
+ //            svg{
+ //                fill: $color-green-primary;
+ //            }
+ //        }
+ //    }
+ //}
+ //
+ //.DateRangePickerInput_arrow_svg {
+ //    // fill: $color-green-primary;
+ //    display:none
+ //}
