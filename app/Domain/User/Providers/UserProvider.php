@@ -3,6 +3,10 @@
 namespace App\Domain\User\Providers;
 
 
+use App\Domain\User\BLL\Activity\ActivityBLL;
+use App\Domain\User\BLL\Activity\ActivityBLLInterface;
+use App\Domain\User\DAL\Activity\ActivityDAL;
+use App\Domain\User\DAL\Activity\ActivityDALInterface;
 use App\Domain\User\Models\Activity;
 use App\Domain\User\Policies\ActivityPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -28,6 +32,8 @@ class UserProvider extends ServiceProvider
     public $bindings = [
         UserBLLInterface::class => UserBLL::class,
         UserDALInterface::class => UserDAL::class,
+        ActivityBLLInterface::class => ActivityBLL::class,
+        ActivityDALInterface::class => ActivityDAL::class
 
     ];
 

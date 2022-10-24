@@ -22,7 +22,7 @@ function SelectColumnFilter ({
     isClearable = false, // is the select clearable
     hideSelectedOptions = false, // should the selected options be hidden from the options
     escapeClearsValue = false, // should escape clear selected values
-    placeholder = t('ui.select_option')
+    placeholder = 'Select option'
   } = filterSettings ?? {}
 
   useEffect(() => {

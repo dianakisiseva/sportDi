@@ -3,13 +3,18 @@
 namespace App\Domain\User\Controllers;
 
 use App\Domain\User\BLL\Activity\ActivityBLLInterface;
+use App\Domain\User\BLL\User\UserBLLInterface;
+use App\Domain\User\Models\Activity;
 use App\Domain\User\Models\Role;
+use App\Domain\User\Models\User;
 use App\Domain\User\Requests\CreateUserRequest;
+use App\Domain\User\Requests\UpdateUserRequest;
 use App\Domain\User\Requests\UserPasswordUpdateRequest;
 use App\Http\Controllers\Controller;
-use App\Domain\User\BLL\User\UserBLLInterface;
-use App\Domain\User\Models\User;
-use App\Domain\User\Requests\UpdateUserRequest;
+use App\Traits\DataTableUtils;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -19,6 +24,9 @@ use Yajra\DataTables\Facades\DataTables;
  */
 class ActivityController extends Controller
 {
+
+    use DataTableUtils;
+
     public function __construct(
         UserBLLInterface $userBLL,
         ActivityBLLInterface $activityBLL
@@ -33,51 +41,72 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        $this->authorize('index', [User::class]);
+//        $this->authorize('index', [User::class]);
 
-        return inertia('User/Index', [
+        return inertia('Activity/Index', [
             'links' => [
-                    'show' => route('users.show', ['user' => '%user%']),
-                    'edit' => route('users.edit', ['user' => '%user%']),
-                    'create' => route('users.create'),
-                    'store' => route('users.store'),
-                    'get' => route('users.get'),
-                    'updatePassword' => route('users.updatePassword', ['user' => '%user%']),
-                    'delete' => route('users.destroy', ['user' => '%user%'])
-                ]
+                    'show' => route('activities.show', ['activity' => '%activity%']),
+                    'edit' => route('activities.edit', ['activity' => '%activity%']),
+                    'create' => route('activities.create'),
+                    'store' => route('activities.store'),
+                    'get' => Auth::user()->role_id == Role::ADMIN
+                        ? route('activities.getAllActivities')
+                        : route('activities.getMyActivities'),
+                    'delete' => route('activities.destroy', ['activity' => '%activity%'])
+                ],
+            'categories' => $this->activityBLL->getCategoriesOptions()
 
         ]);
     }
 
-    public function get()
+    public function getAllActivities()
     {
-        $this->authorize('index', [User::class]);
+//        $this->authorize('index', [User::class]);
 
-        $users = $this->userBLL->getDatatable();
+        $activities = $this->activityBLL->getAllActivities();
 
-        return DataTables::eloquent($users)->make(true);
+        return DataTables::eloquent($activities)
+            ->filter(function ($query) {
+                $this->filterMultipleColumns($query);
+                $this->filterCustomRule($query);
+            }, true)
+            ->make(true);
+
+        return DataTables::eloquent($activities)->make(true);
     }
 
-    public function show(User $user)
+    public function getMyActivities()
     {
-        $this->authorize('view', [User::class]);
+//        $this->authorize('index', [User::class]);
 
-        return inertia('User/View', [
-            'user' => $user,
+        $activities = $this->activityBLL->getMyActivities();
+
+
+        return DataTables::eloquent($activities)->make(true);
+    }
+
+
+    public function show(Activity $activity)
+    {
+//        $this->authorize('view', [User::class]);
+
+        return inertia('Activity/View', [
+            'activity' => $activity,
             'links' => [
-                'edit' => route('users.edit', $user)
+                'edit' => route('activities.edit', $activity)
             ]
         ]);
     }
 
     public function create()
     {
-        $this->authorize('create', [User::class]);
+//        $this->authorize('create', [User::class]);
 
-        return inertia('User/Create', [
+        return inertia('Activity/Create', [
             'links' => [
-                'store' => route('users.store')
-            ]
+                'store' => route('activities.store')
+            ],
+            'categories' => $this->activityBLL->getCategoriesOptions()
         ]);
     }
 
@@ -86,81 +115,71 @@ class ActivityController extends Controller
      *
      * @param CreateUserRequest $request
      */
-    public function store(CreateUserRequest $request)
+    public function store(Request $request)
     {
-        $this->authorize('create', [User::class]);
+//        $this->authorize('create', [User::class]);
 
-        $data = [
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'login' => $request->login,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id' => Role::SPORTSMAN
-        ];
+        $data = $request->except(['submitBtn', 'organized_by']);
+        $data['user_id'] = Auth::user()->id;
+        $data['date'] = Carbon::parse($request->date)->format('d-m-Y');
 
-        $this->userBLL->create($data);
+        if($request->organized_by){
+            $data['organization_id'] = $request->organization_id;
+        }
 
-        return redirect()->route('users.index')
-            ->with('success', 'User successfully created!');
+        $this->activityBLL->create($data);
+
+        return redirect()->route('activities.index')
+            ->with('success', 'Activity successfully created!');
     }
 
-    public function edit(User $user)
+    public function edit(Activity $activity)
     {
-        $this->authorize('update',  $user);
+//        $this->authorize('update',  $activity);
 
-        return inertia('User/Edit', [
-            'user' => $user,
+        return inertia('Activity/Edit', [
+            'activity' => $activity,
             'links' => [
-                'update' => route('users.update', $user),
-                'updatePassword' => route('users.updatePassword', $user),
-                'delete' => route('users.destroy', $user)
-            ]
+                'update' => route('activities.update', $activity),
+                'delete' => route('activities.destroy', $activity)
+            ],
+            'categories' => $this->activityBLL->getCategoriesOptions()
+
         ]);
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(Request $request, Activity $activity)
     {
-        $this->authorize('update',  $user);
+//        $this->authorize('update',  $user);
 
-        $this->userBLL->update($user, $request->all());
+        $data = $request->except(['submitBtn', 'organized_by']);
+        $data['user_id'] = Auth::user()->id;
+        $data['date'] = Carbon::parse($request->date)->format('d-m-Y');
 
-        return redirect(route("users.show", ['user' => $user]))
-            ->with('success', 'User successfully updated!');
+        if($request->organized_by){
+            $data['organization_id'] = $request->organization_id;
+        }
+
+        $this->activityBLL->update($activity, $data);
+
+        return redirect(route("activities.show", ['activity' => $activity]))
+            ->with('success', 'Activity successfully updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param User $user
-     */
-    public function destroy(User $user)
+
+    public function destroy(Activity $activity)
     {
-        $this->authorize('delete',  $user);
+//        $this->authorize('delete',  $user);
 
         try {
-            $this->userBLL->delete($user);
+            $this->activityBLL->delete($activity);
         } catch (\Throwable $tr) {
             throw $tr;
         }
 
         return response()->json([
-            'message' => trans('users.message.successfully_deleted')
+            'message' => 'Activity successfully deleted!'
         ]);
     }
 
-    public function updatePassword(UserPasswordUpdateRequest $request, User $user)
-    {
-        $this->authorize('update',  $user);
-
-        try {
-            $this->userBLL->update($user, ['password' => Hash::make($request->password)]);
-        } catch (\Throwable $tr) {
-            throw $tr;
-        }
-
-        return response()->json([
-            'message' => 'User password has been successfully changed'
-        ]);
-    }
 }

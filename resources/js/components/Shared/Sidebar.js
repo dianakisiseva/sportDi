@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Link} from "../utils";
 import {withTranslation} from 'react-i18next';
 import {IconBurger} from "../Icons";
-import {IconAddressBook, IconMenuDashboard} from "../Icons/Icons";
-import {ROLES} from "./Constants";
+import {IconAddressBook, IconMenuDashboard, IconStarFilled} from "../Icons/Icons";
+import {ROLE, ROLES} from "./Constants";
 
 class Sidebar extends Component {
     constructor(props) {
@@ -42,6 +42,7 @@ class Sidebar extends Component {
         const {t, children, url, auth, user} = this.props;
         const {showMenu, isMenuClicked} = this.state;
         const sideMenuClass = showMenu ? '' : 'side-menu-closed';
+        const isAdmin = auth.user.role_id === ROLE.ADMIN;
 
         return (
             <aside
@@ -67,7 +68,7 @@ class Sidebar extends Component {
                                 </div>
                             </Link>
                         </li>
-                        {auth.user.role_id === ROLES.ADMIN &&
+                        {isAdmin &&
                         <li>
                             <Link href={this.props.menu.links.users}>
                                 <div className="side-menu-nav-categories-icon">
@@ -79,6 +80,16 @@ class Sidebar extends Component {
                             </Link>
                         </li>
                         }
+                        <li>
+                            <Link href={this.props.menu.links.activities}>
+                                <div className="side-menu-nav-categories-icon">
+                                    <IconStarFilled/>
+                                </div>
+                                <div className="side-menu-nav-categories-label">
+                                    {isAdmin ? <span>All activities</span> : <span>My activities</span>}
+                                </div>
+                            </Link>
+                        </li>
 
                     </ul>
                         {/*<Can perform="access phonebook">*/}

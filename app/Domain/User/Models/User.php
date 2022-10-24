@@ -2,6 +2,7 @@
 
 namespace App\Domain\User\Models;
 
+use App\Domain\Mission\Models\MissionLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -49,5 +50,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
     }
 }

@@ -89,7 +89,7 @@ export const Select = ({ formField, value, onChange, errors, showOnly }) => {
           options={options}
           isMulti={isMulti}
           isClearable={isClearable}
-          placeholder={t('ui.select_option')}
+          placeholder='Select option'
           noOptionsMessage={() => t('ui.no_results')}
           name={name}
           className={`select-custom-input ${className}`}

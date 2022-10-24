@@ -14,7 +14,6 @@ const DeleteAccount = ({cancelCallback, successCallback, deleteUser, id}) => {
 
 
     const userId =  deleteUser ? id : auth.user.id
-    console.log(userId)
     const submit = async (e) => {
         e.preventDefault()
         try {

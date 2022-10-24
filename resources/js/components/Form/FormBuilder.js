@@ -330,6 +330,7 @@ const FormBuilder = forwardRef((props, ref) => {
                       minDate={formField.minDateElement ? values[formField.minDateElement] : null}
                       errors={errors[formField.name]}
                       showOnly={showOnly}
+                      label={formField.label}
                     />
                   )
                 case 'file-dropzone':

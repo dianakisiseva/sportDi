@@ -2,12 +2,14 @@
 
 namespace App\Domain\User\Models;
 
+use App\Traits\CarbonDefaultDateFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
     use HasFactory;
+    use CarbonDefaultDateFormat;
 
     protected $guarded = [];
 
@@ -19,6 +21,10 @@ class Activity extends Model
         self::HIKE => 'Hike',
         self::BIKE => 'Bike',
         self::RUN => 'Run',
+    ];
+
+    protected $dates = [
+        'date',
     ];
 
     public function user()

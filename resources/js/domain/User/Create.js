@@ -6,7 +6,6 @@ import FormBuilder from "../../components/Form/FormBuilder";
 export default function Create(props){
     const { links } = props;
 
-    console.log(props)
     const formData = useMemo(
         () => ({
             form: {

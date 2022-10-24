@@ -1,5 +1,5 @@
 import React, {useMemo, useRef} from 'react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import Layout from "../../components/Shared/Layout";
 import ReactModal from "../../components/Modal/ReactModal";
 import FormBuilder from "../../components/Form/FormBuilder";
@@ -9,10 +9,10 @@ import {useToasts} from "react-toast-notifications";
 import {IconDelete} from "../../components";
 import {IconPen} from "../../components/Icons/Icons";
 
-export default function View(props){
-    const { t } = useTranslation();
-    const { user, links } = props;
-    const { addToast } = useToasts()
+export default function View(props) {
+    const {t} = useTranslation();
+    const {user, links, auth} = props;
+    const {addToast} = useToasts()
     const modalRef = useRef()
 
     const formData = useMemo(
@@ -109,7 +109,7 @@ export default function View(props){
     }
 
     const handleChangePasswordSuccessCallback = (res) => {
-        addToast(res.data.message, { appearance: 'success' })
+        addToast(res.data.message, {appearance: 'success'})
         modalRef.current.close()
     }
 
@@ -134,21 +134,25 @@ export default function View(props){
         window.location.href = '/logout'
     }
 
-    return  <Layout {...props}>
+    return <Layout {...props}>
         <div className="container-data profile">
             <div className="container-data-header">
                 <h5>My profile</h5>
                 <div className="container-data-header-buttons">
-                <button
-                    className="btn-stripped-sm"
-                    onClick={() => handleChangePassword()}>
-                    <IconPen/>Change my password
-                </button>
-                <button
-                    className="btn-stripped-sm"
-                    onClick={() => handleDeleteAccount()}>
-                    <IconDelete/> Delete my account
-                </button>
+                    {auth.user.id === user.id &&
+                        <>
+                            <button
+                                className="btn-stripped-sm"
+                                onClick={() => handleChangePassword()}>
+                                <IconPen/>Change my password
+                            </button>
+                            <button
+                                className="btn-stripped-sm"
+                                onClick={() => handleDeleteAccount()}>
+                                <IconDelete/> Delete my account
+                            </button>
+                        </>
+                    }
                 </div>
 
             </div>
@@ -157,7 +161,7 @@ export default function View(props){
                 <FormBuilder   {...props} useInertia={true} formData={formData}/>
             </div>
 
-            <ReactModal ref={modalRef} className='ReactModal__Content--Small' />
+            <ReactModal ref={modalRef} className='ReactModal__Content--Small'/>
 
         </div>
     </Layout>

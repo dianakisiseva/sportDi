@@ -39,7 +39,10 @@ Route::prefix('activities')
     ->group(function () {
         Route::get('/', 'ActivityController@index')->name('activities.index');
         Route::post('/', 'ActivityController@store')->name('activities.store');
-        Route::get('/get', 'ActivityController@get')->name('activities.get');
+
+        Route::get('/get-all', 'ActivityController@getAllActivities')->name('activities.getAllActivities');
+        Route::get('/get-my', 'ActivityController@getMyActivities')->name('activities.getMyActivities');
+
         Route::get('/create', 'ActivityController@create')->name('activities.create');
         Route::get('{activity}', 'ActivityController@show')->name('activities.show');
         Route::get('{activity}/edit', 'ActivityController@edit')->name('activities.edit');

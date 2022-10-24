@@ -19,13 +19,12 @@ class CreateActivitiesTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('name');
             $table->string('place');
-            $table->dateTime('date');
+            $table->date('date');
             $table->string('distance');
             $table->string('elevation')->nullable();
             $table->string('proximal_duration')->nullable();
             $table->string('personal_time')->nullable();
-            $table->boolean('organized_by')->default(false);
-            $table->unsignedBigInteger('organization_id');
+            $table->unsignedBigInteger('organization_id')->nullable();
             $table->string("photo")->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
