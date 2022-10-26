@@ -10,8 +10,8 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import {IconLogout} from "../Icons/Icons";
 import DropdownMenu from "../Utility/DropdownMenu";
 import {selectOptions, selectValue} from "../utils/select_options";
-import Logo from "../../../assets/media/logos/logo-batilex.svg";
-import LogoWide from "../../../assets/media/logos/logo-batilex-wide.svg";
+import Logo from "../../../assets/media/logos/sportDi-logo.png";
+import LogoWide from "../../../assets/media/logos/sportDi-logo-wide.png";
 import {IconProfile} from "../Icons";
 
 export default function HeaderPrime({url, localization, auth, menu}) {

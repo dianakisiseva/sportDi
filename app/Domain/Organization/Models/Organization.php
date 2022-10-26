@@ -2,6 +2,7 @@
 
 namespace App\Domain\Organization\Models;
 
+use App\Domain\User\Models\User;
 use App\Traits\CarbonDefaultDateFormat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,6 +27,17 @@ class Organization extends Model
     protected $dates = [
         'date',
     ];
+
+    protected $appends = ['logo_url'];
+
+    public function getLogoUrlAttribute()
+    {
+        if (empty($this->logo)) {
+            return asset('assets/media/various/profile-placeholder.svg');
+        }
+
+        return asset('uploads/logos/' . $this->logo);
+    }
 
     public function user()
     {

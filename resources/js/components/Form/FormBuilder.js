@@ -18,6 +18,7 @@ import FormData from 'form-data'
 const FormBuilder = forwardRef((props, ref) => {
   const {
     formData,
+      backEndErrors,
     useInertia,
     validateOnChange,
     validateOnBlur,
@@ -228,6 +229,7 @@ const FormBuilder = forwardRef((props, ref) => {
                       }}
                       errors={errors[formField.name]}
                       showOnly={showOnly}
+                      backEndErrors={backEndErrors ? backEndErrors[formField.name] : null}
                     />
                   )
                 case 'checkbox':

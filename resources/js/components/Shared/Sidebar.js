@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from "../utils";
 import {withTranslation} from 'react-i18next';
 import {IconBurger} from "../Icons";
-import {IconAddressBook, IconMenuDashboard, IconStarFilled} from "../Icons/Icons";
+import {IconAddressBook, IconInfo, IconMenuDashboard, IconStarFilled} from "../Icons/Icons";
 import {ROLE, ROLES} from "./Constants";
 
 class Sidebar extends Component {
@@ -90,7 +90,16 @@ class Sidebar extends Component {
                                 </div>
                             </Link>
                         </li>
-
+                        <li>
+                            <Link href={this.props.menu.links.organizations}>
+                                <div className="side-menu-nav-categories-icon">
+                                    <IconInfo/>
+                                </div>
+                                <div className="side-menu-nav-categories-label">
+                                    <span>All organizations</span>
+                                </div>
+                            </Link>
+                        </li>
                     </ul>
                         {/*<Can perform="access phonebook">*/}
                         {/*    <li className="side-menu-nav-categories-extended">*/}

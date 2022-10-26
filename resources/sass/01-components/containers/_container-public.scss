@@ -25,13 +25,20 @@
         }
 
         &-footer {
-            margin-top: -30px;
-            
+            margin-top: -50px;
+
+            .btn-tertiary {
+                width: calc(50% - 10px);
+                min-width: 0;
+                display: flex;
+                font: 700 1rem $font-klima, sans-serif;
+            }
+
             a {
                 display: block;
                 font: 400 calc-rem(14px) $font-klima;
             }
-        }  
+        }
     }
 
     .register-block {

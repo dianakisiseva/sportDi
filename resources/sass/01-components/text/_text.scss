@@ -60,6 +60,9 @@ $color in ($colors-text) {
         padding: 10px;
         font-weight: bold;
     }
+    &-underline {
+        text-decoration: underline;
+    }
     &-prewrap {
         white-space: pre-wrap;
     }
@@ -78,6 +81,14 @@ $color in ($colors-text) {
             color: white
         }
 
+    }
+
+    &-center {
+        text-align: center;
+    }
+
+    &-right {
+        text-align: right;
     }
 }
 

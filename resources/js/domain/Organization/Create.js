@@ -13,16 +13,18 @@ export default function Create(props){
                 class: 'form-class row'
             },
             fields: [
-                // {
-                //     element: 'file-dropzone',
-                //     dropzone_type: 'json',
-                //     name: 'logo',
-                //     text: 'Logo',
-                //     wrapper: {
-                //         element: "div",
-                //         class: "input-element input-width-50"
-                //     }
-                // },
+                {
+                    element: 'file-dropzone',
+                    dropzone_type: 'json',
+                    name: 'logo',
+                    text: 'Logo',
+                    label: 'Logo',
+                    rules: 'required',
+                    wrapper: {
+                        element: "div",
+                        class: "col-6 input-width-50"
+                    }
+                },
                 {
                     element: "text",
                     text: '',
@@ -130,7 +132,11 @@ export default function Create(props){
                     value: '',
                     rows: 4,
                     maxLength: 285,
-                    counter: true
+                    counter: true,
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-12'
+                    }
                 },
 
             ],

@@ -68,7 +68,7 @@ export default function View(props) {
                     element: 'datepicker',
                     type: 'text',
                     name: 'date',
-                    // value: formatDate(activity.date, 'yyyy-MM-dd') ?? '',
+                    // value: new Date(activity.date),
                     value: '',
                     label: 'Date',
                     placeholder: 'Date',

@@ -25,7 +25,8 @@ class User extends Authenticatable
         'login',
         'email',
         'password',
-        'role_id'
+        'role_id',
+        'photo'
     ];
 
     /**
@@ -46,6 +47,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends = ['photo_url'];
+
+    public function getPhotoUrlAttribute()
+    {
+        if (empty($this->photo)) {
+            return asset('assets/media/various/profile-placeholder.svg');
+        }
+
+        return 'uploads/profile-pictures/' . $this->photo;
+    }
 
     public function role()
     {

@@ -2,7 +2,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #fff;
     z-index: 1000; // Fix for NPROGRESS component
 }
 
@@ -289,7 +288,7 @@
 }
 
 .react-table-bulk-actions {
-    .react-table-bulk-actions-wrapper {
+    .react-table-bulk-actions-wrapper {ackground-color: #fff;
         display: flex;
         flex-direction: row;
         justify-content: start;
@@ -298,5 +297,18 @@
             width: calc(25% - 10px);
             margin-right: 10px;
         }
+    }
+}
+
+.profile-thumb {
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 50%;
+
+    img {
+        height: 100%;
+        object-fit: cover;
     }
 }

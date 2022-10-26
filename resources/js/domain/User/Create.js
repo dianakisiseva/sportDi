@@ -6,6 +6,7 @@ import FormBuilder from "../../components/Form/FormBuilder";
 export default function Create(props){
     const { links } = props;
 
+    console.log(props)
     const formData = useMemo(
         () => ({
             form: {
@@ -14,6 +15,26 @@ export default function Create(props){
                 class: 'form-class row'
             },
             fields: [
+                {
+                    element: 'file-dropzone',
+                    dropzone_type: 'json',
+                    name: 'photo',
+                    label: 'Photo',
+                    text: 'photo',
+                    wrapper: {
+                        element: "div",
+                        class: "col-6 input-element input-width-50"
+                    }
+                },
+                {
+                    element: "text",
+                    text: '',
+                    name: 'placeholder2',
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-6'
+                    }
+                },
                 {
                     element: 'input',
                     type: 'text',
@@ -121,7 +142,7 @@ export default function Create(props){
             </div>
 
             <div className="container-data">
-                <FormBuilder   {...props} useInertia={true} formData={formData}/>
+                <FormBuilder   {...props} useInertia={true} formData={formData} backEndErrors={props.errors}/>
             </div>
         </div>
     </Layout>

@@ -80,8 +80,8 @@ class OrganizationController extends Controller
     {
 //        $this->authorize('create', [organization::class]);
 
-        $logo = $request->logo;
-        $test =  basename($logo->store('public/uploads/logos'));
+        $logo = $request->file('logo');
+
         $data = [
             'name' => $request->name,
             'login' => $request->login,
@@ -90,7 +90,7 @@ class OrganizationController extends Controller
             'facebook' => $request->facebook,
             'description' => $request->decription,
             'password' => Hash::make($request->password),
-//            'logo' =>  basename($logo->store('public/uploads/logos'))
+            'logo' =>  $logo ? basename($logo->store('public/uploads/logos')) : null
         ];
 
         $this->organizationBLL->create($data);

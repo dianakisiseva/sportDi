@@ -5,7 +5,7 @@ import CreateUserModal from './components/CreateUserModal'
 import {InertiaLink, usePage} from '@inertiajs/inertia-react'
 // import UpdatePasswordModal from './components/UpdatePasswordModal'
 import Layout from '../../components/Shared/Layout'
-import {IconDelete, IconPen, IconShape} from "../../components/Icons/Icons";
+import {IconDeleteBin, IconPen, IconShape} from "../../components/Icons/Icons";
 import {route} from "../../utils";
 import DeleteAccount from "./components/DeleteAccount";
 import IconTrash from "../../components/Icons/IconTrash";
@@ -31,7 +31,8 @@ const Index = (props) => {
             orderable: true,
             disableSortBy: false,
             searchable: false,
-            disableFilters: true
+            disableFilters: true,
+
         },
         {
             id: 'first_name',
@@ -100,9 +101,9 @@ const Index = (props) => {
                                 <IconPen/>
                             </InertiaLink>
                             <button
-                                className="btn-stripped-sm"
+                                className="btn-stripped"
                                 onClick={() => handleDeleteAccount(row.original.id)}>
-                                <IconTrash/>
+                                <IconDeleteBin/>
                             </button>
                         </div>
                     </>
@@ -157,7 +158,8 @@ const Index = (props) => {
                             ref={tableRef}
                             fetchUrl={links.get}
                             initialState={{
-                                pageSize: 50
+                                pageSize: 50,
+                                hiddenColumns: ['id']
                             }}
                         />
                     </div>

@@ -34,19 +34,29 @@ export default function View(props){
             <div className="form-group profile-body">
                 <div className="form-group-flex">
                     <div className="form-element-half">
-                        <h3>First name</h3>
-                        <p>{user.first_name}</p>
-                    </div><div className="form-element-half">
-                        <h3>Last name</h3>
-                        <p>{user.last_name}</p>
+                        <div className="profile-thumb">
+                            <img src="/assets/media/various/profile-placeholder.svg" alt="user thumbnail"/>
+                        </div>
                     </div>
                     <div className="form-element-half">
-                        <h3>Login</h3>
-                        <p>{user.login}</p>
-                    </div>
-                    <div className="form-element-half">
-                        <h3>Email</h3>
-                        <p>{user.email}</p>
+                        <div className="form-group-flex">
+
+                            <div className="form-element-full">
+                                <h3>First name</h3>
+                                <p>{user.first_name}</p>
+                            </div><div className="form-element-full">
+                            <h3>Last name</h3>
+                            <p>{user.last_name}</p>
+                        </div>
+                            <div className="form-element-full">
+                                <h3>Login</h3>
+                                <p>{user.login}</p>
+                            </div>
+                            <div className="form-element-full">
+                                <h3>Email</h3>
+                                <p>{user.email}</p>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

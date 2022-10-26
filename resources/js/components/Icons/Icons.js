@@ -15,6 +15,13 @@ export const IconDelete = ({ className }) => {
     </svg>;
 };
 
+export const IconDeleteBin = ({ className }) => {
+    return <svg className={`svg-inline ${className ? className : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path fill="currentColor"
+              d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path>
+    </svg>;
+};
+
 export const IconLogout = ({ className }) => {
     return <svg className={`svg-inline ${className ? className : ''}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 12.7">
         <path id="Shape" d="M0.5,12.7c-0.3,0-0.5-0.3-0.5-0.6V0.6C0,0.3,0.2,0,0.5,0h7.4c0.3,0,0.5,0.3,0.5,0.6v1.9H7.4V1.3H1.1v10.2h6.3

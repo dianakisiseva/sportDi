@@ -57,6 +57,7 @@ export const Datepicker = ({ formField, value, onChange, errors, minDate, showOn
             dateFormat='dd-MM-yyyy'
             isClearable={!isDisabled && isClearable}
             disabled={isDisabled}
+            placeholderText={'Please select a date'}
           />
 
           <FieldError errors={errors} />

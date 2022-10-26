@@ -54,6 +54,7 @@ class HandleInertiaRequests extends Middleware
                    'my_profile' => Auth::user() ? route('users.show', ['user' => auth()->user()]) : null,
                    'users' => route('users.index'),
                    'activities' => route('activities.index'),
+                   'organizations' => route('organizations.index')
                ]
            ],
             'url' => [

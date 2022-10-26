@@ -58,38 +58,6 @@ const Index = (props) => {
             searchable: false,
             disableFilters: true
         },
-        ...(isAdmin ? [
-            {
-                id: 'login',
-                Header: 'User login',
-                accessor: 'login',
-                name: 'login',
-                search: {value: '', regex: 'false'},
-                orderable: true,
-                disableSortBy: false,
-                searchable: false,
-                disableFilters: true,
-                Cell: ({ row }) => {return row.original.user.login}
-            }
-            ] : []),
-
-        {
-            id: 'category_id',
-            Header: 'Category',
-            accessor: 'category_id',
-            name: 'category_id',
-            search: {value: '', regex: 'false'},
-            orderable: true,
-            disableSortBy: false,
-            searchable: true,
-            disableFilters: false,
-            filterComponent: SelectColumnFilter,
-            filterSettings: {
-                options: categories
-            },
-            Cell: ({ value }) => {return CATEGORIES[value]}
-
-        },
         {
             id: 'name',
             Header: 'Name',
@@ -101,71 +69,88 @@ const Index = (props) => {
             searchable: true,
             disableFilters: true
         },
-        {
-            id: 'place',
-            Header: 'Place',
-            accessor: 'place',
-            name: 'place',
-            search: {value: '', regex: 'false'},
-            orderable: true,
-            disableSortBy: false,
-            searchable: true,
-            disableFilters: true
-        },
-        {
-            id: 'date',
-            Header: 'Date',
-            accessor: 'date',
-            name: 'date',
-            search: {value: '', regex: 'false'},
-            orderable: true,
-            disableSortBy: false,
-            searchable: true,
-            disableFilters: true
-        },
-        {
-            id: 'distance',
-            Header: 'Distance',
-            accessor: 'distance',
-            name: 'distance',
-            search: {value: '', regex: 'false'},
-            orderable: true,
-            disableSortBy: false,
-            searchable: true,
-            disableFilters: true
-        },
-        {
-            id: 'actions',
-            Header: 'Actions',
-            accessor: 'actions',
-            name: 'actions',
-            search: {value: '', regex: 'false'},
-            orderable: false,
-            disableSortBy: true,
-            searchable: false,
-            disableFilters: true,
-            Cell: ({row}) => {
-                return (
-                    <>
-                        <div className="rt-btn-wrapper">
-                            <InertiaLink className="btn-stripped"
-                                         href={route(links.show, {activity: row.original.id})}>
-                                <IconShape/>
-                            </InertiaLink>
-                            <InertiaLink className="btn-stripped"
-                                         href={route(links.edit, {activity: row.original.id})}>
-                                <IconPen/>
-                            </InertiaLink>
-                            <button
-                                className="btn-stripped-sm"
-                                onClick={() => handleDeleteAccount(row.original.id)}>
-                                <IconTrash/>
-                            </button>
-                        </div>
-                    </>
-                )
+        ...(isAdmin ? [
+            {
+                id: 'login',
+                Header: 'User login',
+                accessor: 'login',
+                name: 'login',
+                search: {value: '', regex: 'false'},
+                orderable: true,
+                disableSortBy: false,
+                searchable: false,
+                disableFilters: true,
+                // Cell: ({ row }) => {return row.original.user.login}
             }
-        }
+            ] : []),
+
+        {
+            id: 'city',
+            Header: 'City',
+            accessor: 'city',
+            name: 'city',
+            search: {value: '', regex: 'false'},
+            orderable: true,
+            disableSortBy: false,
+            searchable: true,
+            disableFilters: true,
+
+        },
+        {
+            id: 'email',
+            Header: 'Email',
+            accessor: 'email',
+            name: 'email',
+            search: {value: '', regex: 'false'},
+            orderable: true,
+            disableSortBy: false,
+            searchable: true,
+            disableFilters: true
+        },
+        {
+            id: 'facebook',
+            Header: 'Facebook link',
+            accessor: 'facebook',
+            name: 'facebook',
+            search: {value: '', regex: 'false'},
+            orderable: true,
+            disableSortBy: false,
+            searchable: true,
+            disableFilters: true
+        },
+
+        // {
+        //     id: 'actions',
+        //     Header: 'Actions',
+        //     accessor: 'actions',
+        //     name: 'actions',
+        //     search: {value: '', regex: 'false'},
+        //     orderable: false,
+        //     disableSortBy: true,
+        //     searchable: false,
+        //     disableFilters: true,
+        //     Cell: ({row}) => {
+        //         return (
+        //             <>
+        //                 <div className="rt-btn-wrapper">
+        //                     <InertiaLink className="btn-stripped"
+        //                                  href={route(links.show, {activity: row.original.id})}>
+        //                         <IconShape/>
+        //                     </InertiaLink>
+        //                     <InertiaLink className="btn-stripped"
+        //                                  href={route(links.edit, {activity: row.original.id})}>
+        //                         <IconPen/>
+        //                     </InertiaLink>
+        //                     <button
+        //                         className="btn-stripped-sm"
+        //                         onClick={() => handleDeleteAccount(row.original.id)}>
+        //                         <IconTrash/>
+        //                     </button>
+        //                 </div>
+        //             </>
+        //         )
+        //     }
+        // }
 
     ], [])
 
@@ -173,14 +158,12 @@ const Index = (props) => {
         <Layout {...props}>
             <div className="container-data profile">
                 <div className="container-data-header">
-                    {isAdmin ?
-                        <h5>All activities</h5> :
-                        <h5>My activities</h5>
-                    }
+                    <h5>Organizations</h5>
+
                     <div className="container-data-header-buttons">
-                        {!isAdmin &&
+                        {isAdmin &&
                         <InertiaLink className="btn-primary" href={props.links.create}>
-                            Add activity
+                            Create an organization
                         </InertiaLink>
                         }
                     </div>

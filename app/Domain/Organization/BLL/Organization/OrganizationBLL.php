@@ -17,7 +17,7 @@ class OrganizationBLL extends BaseBLL implements OrganizationBLLInterface
     public function getDatatable()
     {
         return $this->DAL->query()->select([
-            'id', 'first_name', 'last_name', 'login', 'email'
+            'id', 'name', 'city', 'login', 'email', 'facebook'
         ]);
     }
 

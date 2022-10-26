@@ -75,8 +75,9 @@ export default function Login(props){
 
 
 
-                <div className="auth-block-footer">
-                <InertiaLink href='#'>Forgot my password</InertiaLink>
+            <div className="auth-block-footer">
+                <InertiaLink className="btn-tertiary" href='#'>Register</InertiaLink>
+                <InertiaLink className="text-center mt-4 text-underline" href='#'>Forgot my password</InertiaLink>
             </div>
         </div>
      </PublicLayout>

@@ -76,15 +76,16 @@
     }
 
     .branding {
-        background: url("../../../assets/media/images/header-visual.jpg") no-repeat center;
+        background: url("../../../assets/media/images/sportDi-bg.jpg") no-repeat center;
         background-size: cover;
         padding: 5px;
         margin-top: 0;
+        min-height: 240px;
 
         &-logo {
             margin-bottom: 30px;
-            margin-top: -50px;
-            max-width: 120px;
+            margin-top: -37px;
+            max-width: 250px;
             height: auto;
         }
     }

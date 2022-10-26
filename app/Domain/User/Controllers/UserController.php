@@ -86,6 +86,8 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+        $photo = $request->file('photo');
+
         $this->authorize('create', [User::class]);
 
         $data = [
@@ -94,7 +96,8 @@ class UserController extends Controller
             'login' => $request->login,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role_id' => Role::SPORTSMAN
+            'role_id' => Role::SPORTSMAN,
+            'photo' => $photo ? basename($photo->store('public/uploads/profile-pictures')) : null
         ];
 
         $this->userBLL->create($data);

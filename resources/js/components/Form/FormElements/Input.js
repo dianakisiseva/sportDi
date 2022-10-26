@@ -3,7 +3,7 @@ import { FieldWrapper } from './FieldWrapper'
 import { FieldError } from './FieldError'
 import { isRequiredFromRules } from '../../../utils'
 
-export const Input = ({ formField, value, onChange, errors, showOnly }) => {
+export const Input = ({ formField, value, onChange, errors, showOnly, backEndErrors }) => {
   const {
     wrapper, // wrapper for the element
     label, // label of the element
@@ -17,6 +17,7 @@ export const Input = ({ formField, value, onChange, errors, showOnly }) => {
     disabled
   } = formField
 
+    console.log(errors)
   const isRequired = isRequiredFromRules(rules)
 
   if (showOnly) {
@@ -67,6 +68,8 @@ export const Input = ({ formField, value, onChange, errors, showOnly }) => {
           />
 
           <FieldError errors={errors} />
+            {backEndErrors && <FieldError errors={backEndErrors} />}
+
         </div>
       </div>
     </FieldWrapper>
