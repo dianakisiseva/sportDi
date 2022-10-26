@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\User\BLL;
+namespace App\Traits;
 
 abstract class BaseBLL
 {

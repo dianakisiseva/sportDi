@@ -62,7 +62,8 @@ class UserController extends Controller
         return inertia('User/View', [
             'user' => $user,
             'links' => [
-                'edit' => route('users.edit', $user)
+                'edit' => route('users.edit', $user),
+                'index' => route('users.index')
             ]
         ]);
     }

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Domain\User\BLL\Activity;
+namespace App\Domain\Organization\BLL\Event;
 
-use App\Domain\User\DAL\Activity\ActivityDALInterface;
+use App\Domain\Organization\DAL\Event\EventDALInterface;
 use App\Domain\User\Models\Activity;
 use App\Traits\BaseBLL;
 use Illuminate\Support\Facades\Auth;
 
-class ActivityBLL extends BaseBLL implements ActivityBLLInterface
+class EventBLL extends BaseBLL implements EventBLLInterface
 {
-    public function __construct(ActivityDALInterface $activityDAL)
+    public function __construct(EventDALInterface $eventDAL)
     {
-        $this->DAL = $activityDAL;
+        $this->DAL = $eventDAL;
     }
 
     public function getAllActivities()

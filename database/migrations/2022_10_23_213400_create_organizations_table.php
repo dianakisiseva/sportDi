@@ -16,13 +16,15 @@ class CreateOrganizationsTable extends Migration
         Schema::create('organizations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('creator_id');
+            $table->string('login');
+            $table->string('email')->unique();
             $table->string('city');
             $table->string('logo')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('description')->nullable();
+            $table->string('password');
             $table->timestamps();
 
-            $table->foreign('creator_id')->references('id')
-                ->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

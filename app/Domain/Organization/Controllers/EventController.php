@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Domain\User\Controllers;
+namespace App\Domain\Organization\Controllers;
 
+use App\Domain\Organization\BLL\Event\EventBLLInterface;
 use App\Domain\User\BLL\Activity\ActivityBLLInterface;
 use App\Domain\User\BLL\User\UserBLLInterface;
 use App\Domain\User\Models\Activity;
@@ -18,21 +19,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
+
 /**
- * @property UserBLLInterface userBLL
- * @property ActivityBLLInterface $activityBLL
+ * @property EventBLLInterface $eventBLL
  */
-class ActivityController extends Controller
+class EventController extends Controller
 {
 
     use DataTableUtils;
 
     public function __construct(
-        UserBLLInterface $userBLL,
-        ActivityBLLInterface $activityBLL
+        EventBLLInterface $eventBLL
     ){
-        $this->userBLL = $userBLL;
-        $this->activityBLL = $activityBLL;
+        $this->eventBLL = $eventBLL;
     }
 
     /**

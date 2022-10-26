@@ -2,8 +2,8 @@
 
 namespace App\Domain\User\BLL\User;
 
-use App\Domain\User\BLL\BaseBLL;
 use App\Domain\User\DAL\User\UserDALInterface;
+use App\Traits\BaseBLL;
 
 /**
  * @property UserDALInterface DAL

@@ -2,8 +2,8 @@
 
 namespace App\Domain\User\DAL\User;
 
-use App\Domain\User\BLL\BaseDAL;
 use App\Domain\User\Models\User;
+use App\Traits\BaseDAL;
 
 /**
  * @property User model
