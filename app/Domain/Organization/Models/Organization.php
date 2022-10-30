@@ -33,10 +33,9 @@ class Organization extends Model
     public function getLogoUrlAttribute()
     {
         if (empty($this->logo)) {
-            return asset('assets/media/various/profile-placeholder.svg');
+            return asset('assets/media/various/organization-example.png');
         }
-
-        return asset('uploads/logos/' . $this->logo);
+        return "/storage/uploads/logos/" . $this->logo;
     }
 
     public function user()
@@ -44,8 +43,8 @@ class Organization extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-//    public function organization()
-//    {
-//        return $this->belongsTo(User::class, 'user_id');
-//    }
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

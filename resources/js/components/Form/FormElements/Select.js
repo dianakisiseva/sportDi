@@ -90,7 +90,7 @@ export const Select = ({ formField, value, onChange, errors, showOnly }) => {
           isMulti={isMulti}
           isClearable={isClearable}
           placeholder='Select option'
-          noOptionsMessage={() => t('ui.no_results')}
+          noOptionsMessage={() => 'No results found'}
           name={name}
           className={`select-custom-input ${className}`}
           classNamePrefix={isMulti ? 'select-multi' : 'select'}

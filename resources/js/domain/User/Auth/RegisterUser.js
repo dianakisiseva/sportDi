@@ -1,45 +1,25 @@
 import React, {useMemo} from 'react';
-import Layout from "../../components/Shared/Layout";
-import FormBuilder from "../../components/Form/FormBuilder";
+import {FormBuilder, Layout} from "../../../components";
+import PublicLayout from "../../../components/Shared/PublicLayout";
 
-export default function Create(props){
+export default function RegisterUser(props){
     const { links } = props;
 
+    console.log(props)
     const formData = useMemo(
         () => ({
             form: {
-                url: links.store,
+                url: links.registerUser,
                 method: 'post',
                 class: 'form-class row'
             },
             fields: [
                 {
-                    element: 'file-dropzone',
-                    dropzone_type: 'json',
-                    name: 'logo',
-                    text: 'Logo',
-                    label: 'Logo',
-                    rules: 'required',
-                    wrapper: {
-                        element: "div",
-                        class: "col-6 input-width-50"
-                    }
-                },
-                {
-                    element: "text",
-                    text: '',
-                    name: 'placeholder2',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
-                {
                     element: 'input',
                     type: 'text',
-                    name: 'name',
-                    label: 'Name',
-                    placeholder: 'Name',
+                    name: 'first_name',
+                    label: 'First name',
+                    placeholder: 'First name',
                     value: '',
                     rules: 'required',
                     wrapper: {
@@ -50,10 +30,10 @@ export default function Create(props){
                 {
                     element: 'input',
                     type: 'text',
-                    name: 'city',
+                    name: 'last_name',
                     value: '',
-                    label: 'City',
-                    placeholder: 'City',
+                    label: 'Last name',
+                    placeholder: 'Last name',
                     rules: 'required',
                     wrapper: {
                         element: 'div',
@@ -62,11 +42,12 @@ export default function Create(props){
                 },
                 {
                     element: 'input',
+                    type: 'text',
                     name: 'login',
+                    value: '',
                     label: 'Login',
                     placeholder: 'Login',
                     rules: 'required',
-                    value: '',
                     wrapper: {
                         element: 'div',
                         class: 'col-6'
@@ -85,7 +66,6 @@ export default function Create(props){
                         class: 'col-6'
                     }
                 },
-
                 {
                     element: 'input',
                     type: 'password',
@@ -111,37 +91,10 @@ export default function Create(props){
                         element: 'div',
                         class: 'col-6'
                     }
-                },
-                {
-                    element: 'input',
-                    type: 'text',
-                    name: 'facebook',
-                    value: '',
-                    label: 'Facebook link',
-                    placeholder: 'Facebook link',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
-                {
-                    element: 'textarea',
-                    name: 'description',
-                    label: 'Description',
-                    placeholder: 'Description',
-                    value: '',
-                    rows: 4,
-                    maxLength: 285,
-                    counter: true,
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-12'
-                    }
-                },
-
+                }
             ],
             submit: {
-                text: 'Create',
+                text: 'Register',
                 class: "btn-primary",
                 wrapper: {
                     element: "div",
@@ -158,10 +111,11 @@ export default function Create(props){
     )
 
 
-    return  <Layout {...props}>
+    return  <PublicLayout {...props}>
+        <div className="container">
         <div className="container-data profile">
             <div className="container-data-header">
-                <h5>Create an organization</h5>
+                <h5>Register</h5>
                 <div className="container-data-header-buttons">
                 </div>
 
@@ -171,5 +125,6 @@ export default function Create(props){
                 <FormBuilder   {...props} useInertia={true} formData={formData} backEndErrors={props.errors}/>
             </div>
         </div>
-    </Layout>
+        </div>
+    </PublicLayout>
 }

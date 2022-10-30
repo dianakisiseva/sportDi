@@ -123,40 +123,40 @@ export default function Create(props){
                         class: 'col-6'
                     }
                 },
-                {
-                    element: "checkbox",
-                    name: "organized_by",
-                    label: 'Is it this activity organized by Organization?',
-                    value: false,
-                    wrapper: {
-                        element: "div",
-                        class: "col-6 input-checkbox"
-                    }
-                },
-                {
-                    element: "text",
-                    text: '',
-                    name: 'placeholder',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
-                {
-                    element: 'input',
-                    type: 'text',
-                    name: 'organization_id',
-                    value: '',
-                    // label: 'Organization',
-                    placeholder: 'Organization',
-                    visible: (values) => {
-                        return values.organized_by === true
-                    },
-                    wrapper: {
-                        element: "div",
-                        class: "col-6 input-checkbox"
-                    }
-                },
+                // {
+                //     element: "checkbox",
+                //     name: "organized_by",
+                //     label: 'Is it this activity organized by Organization?',
+                //     value: false,
+                //     wrapper: {
+                //         element: "div",
+                //         class: "col-6 input-checkbox"
+                //     }
+                // },
+                // {
+                //     element: "text",
+                //     text: '',
+                //     name: 'placeholder',
+                //     wrapper: {
+                //         element: 'div',
+                //         class: 'col-6'
+                //     }
+                // },
+                // {
+                //     element: 'input',
+                //     type: 'text',
+                //     name: 'organization_id',
+                //     value: '',
+                //     // label: 'Organization',
+                //     placeholder: 'Organization',
+                //     visible: (values) => {
+                //         return values.organized_by === true
+                //     },
+                //     wrapper: {
+                //         element: "div",
+                //         class: "col-6 input-checkbox"
+                //     }
+                // },
                 {
                     element: "text",
                     text: '',
@@ -174,7 +174,11 @@ export default function Create(props){
                     value: '',
                     rows: 4,
                     maxLength: 285,
-                    counter: true
+                    counter: true,
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-12'
+                    }
                 },
 
             ],

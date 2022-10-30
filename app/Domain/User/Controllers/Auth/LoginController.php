@@ -33,7 +33,12 @@ class LoginController extends Controller
      */
     public function login()
     {
-        return inertia('User/Auth/Login');
+        return inertia('User/Auth/Login',[
+            'links' => [
+                'registerUser' => route('register.user'),
+                'registerOrganization' => route('register.organization')
+            ]
+        ]);
     }
 
     protected function validateLogin(Request $request)

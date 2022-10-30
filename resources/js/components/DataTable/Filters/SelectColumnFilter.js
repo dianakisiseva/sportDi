@@ -51,7 +51,7 @@ function SelectColumnFilter ({
         }}
         isMulti={isMulti}
         placeholder={placeholder}
-        noOptionsMessage={() => t('ui.no_results')}
+        noOptionsMessage={() => 'No results found'}
         className='select-custom-input'
         classNamePrefix={isMulti ? 'select-multi' : 'select'}
         isSearchable={isSearchable}

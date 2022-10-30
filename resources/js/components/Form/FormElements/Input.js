@@ -17,7 +17,6 @@ export const Input = ({ formField, value, onChange, errors, showOnly, backEndErr
     disabled
   } = formField
 
-    console.log(errors)
   const isRequired = isRequiredFromRules(rules)
 
   if (showOnly) {

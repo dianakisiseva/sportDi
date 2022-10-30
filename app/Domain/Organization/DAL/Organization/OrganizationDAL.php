@@ -13,4 +13,9 @@ class OrganizationDAL extends BaseDAL implements OrganizationDALInterface
         $this->model = $organization;
     }
 
+    public function getOrganizationByLogin($login)
+    {
+        return $this->model->where('login', $login)->first();
+    }
+
 }

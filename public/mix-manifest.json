@@ -1,6 +1,6 @@
 {
-    "/js/app.js": "/js/app.js?id=bf71b795ff58ffe8e6557c73d7524ee4",
-    "/css/app.css": "/css/app.css?id=09295989f6317613b050aefe73897008",
+    "/js/app.js": "/js/app.js?id=c5c2c39a8fe002065b404b0a8cbcd90d",
+    "/css/app.css": "/css/app.css?id=7e0d29f2b6491f700eb90c948333ad8d",
     "/assets/fonts/klima/Klima-Black.eot": "/assets/fonts/klima/Klima-Black.eot?id=4dbe662a1fd85d719f53c5b10ef16621",
     "/assets/fonts/klima/Klima-Black.svg": "/assets/fonts/klima/Klima-Black.svg?id=05aa4bf319285ef0bfc01c38bbfdc11b",
     "/assets/fonts/klima/Klima-Black.ttf": "/assets/fonts/klima/Klima-Black.ttf?id=aa00588d8939a129ebaa0c8983b46cbb",
@@ -223,13 +223,14 @@
     "/assets/media/icons/icon-search.svg": "/assets/media/icons/icon-search.svg?id=4e9b25a5e405fa1974f0163d5f70de87",
     "/assets/media/icons/icon-top-orange.svg": "/assets/media/icons/icon-top-orange.svg?id=396f66b38fdc714983f75b6204dc2af7",
     "/assets/media/images/header-visual.jpg": "/assets/media/images/header-visual.jpg?id=354aad5638c5faa1de04afd604033547",
+    "/assets/media/images/layout-bg.png": "/assets/media/images/layout-bg.png?id=0d7f3bb761768174b46dcb1ce6be8a80",
+    "/assets/media/images/sportDi-bg.jpg": "/assets/media/images/sportDi-bg.jpg?id=e7e5036456f76ac74d9cf69d67ce50cb",
+    "/assets/media/logos/img.png": "/assets/media/logos/img.png?id=0d7f3bb761768174b46dcb1ce6be8a80",
     "/assets/media/logos/logo-batilex-wide.svg": "/assets/media/logos/logo-batilex-wide.svg?id=c1e9ab71dc76b6c1f41add7a713a787b",
     "/assets/media/logos/logo-batilex.png": "/assets/media/logos/logo-batilex.png?id=cc9557a424148713a5fea4826be5b131",
     "/assets/media/logos/logo-batilex.svg": "/assets/media/logos/logo-batilex.svg?id=e82e9fa33a22b767deae57e2b6a83e9d",
-    "/assets/media/various/profile-placeholder.svg": "/assets/media/various/profile-placeholder.svg?id=ab604c4a08b43471e332040505345177",
-    "/assets/media/images/sportDi-bg.jpg": "/assets/media/images/sportDi-bg.jpg?id=e7e5036456f76ac74d9cf69d67ce50cb",
-    "/assets/media/logos/sportDi-logo.png": "/assets/media/logos/sportDi-logo.png?id=f93da73cade912578b37972bf8a47be2",
-    "/assets/media/logos/img.png": "/assets/media/logos/img.png?id=0d7f3bb761768174b46dcb1ce6be8a80",
     "/assets/media/logos/sportDi-logo-wide.png": "/assets/media/logos/sportDi-logo-wide.png?id=9796992e1f6f5ef9392547f0d8801820",
-    "/assets/media/images/layout-bg.png": "/assets/media/images/layout-bg.png?id=0d7f3bb761768174b46dcb1ce6be8a80"
+    "/assets/media/logos/sportDi-logo.png": "/assets/media/logos/sportDi-logo.png?id=f93da73cade912578b37972bf8a47be2",
+    "/assets/media/various/organization-example.png": "/assets/media/various/organization-example.png?id=fbb2931aeb570a1f39d45fedf542b197",
+    "/assets/media/various/profile-placeholder.svg": "/assets/media/various/profile-placeholder.svg?id=ab604c4a08b43471e332040505345177"
 }

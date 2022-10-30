@@ -9,7 +9,7 @@ const ReactModal = forwardRef(
     const [isOpen, setIsOpen] = useState(false)
     const [title, setTitle] = useState(null)
     const [body, setBody] = useState(null)
-    const { className } = props
+    const { className, closeButton } = props
     const modalClass = classNames('Content', className)
 
     useImperativeHandle(
@@ -51,7 +51,10 @@ const ReactModal = forwardRef(
         shouldCloseOnOverlayClick={false}
       >
         <div className={`modal-header ${!title || !title.length ? 'modal-no-border' : ''}`}>
-          <h1>{title}</h1>
+            <div className="react-modal-header-title-icon">
+                {closeButton && <button onClick={close} className="btn-close b-right"></button>}
+            </div>
+            <h5>{title}</h5>
 
           <button onClick={close} className='modal-btn-close' />
         </div>

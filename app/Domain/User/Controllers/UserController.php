@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Domain\User\BLL\User\UserBLLInterface;
 use App\Domain\User\Models\User;
 use App\Domain\User\Requests\UpdateUserRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -122,9 +121,21 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request, User $user)
     {
+        $photo = $request->file('photo');
+
+        $data = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'login' => $request->login,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => Role::SPORTSMAN,
+            'photo' => $photo ? basename($photo->store('public/uploads/profile-pictures')) : null
+        ];
+
         $this->authorize('update',  $user);
 
-        $this->userBLL->update($user, $request->all());
+        $this->userBLL->update($user, $data);
 
         return redirect(route("users.show", ['user' => $user]))
             ->with('success', 'User successfully updated!');

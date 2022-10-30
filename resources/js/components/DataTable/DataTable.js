@@ -469,7 +469,7 @@ const DataTable = forwardRef(({
 
               {!loading && !pageCount &&
                 <tr className='table-layout__body-row'>
-                  <td className='table-layout__body-col text-center' colSpan='99'>{noDataMessage ?? t('ui.no_results')}</td>
+                  <td className='table-layout__body-col text-center' colSpan='99'>{noDataMessage ?? 'No results found'}</td>
                 </tr>}
 
               {!!loading &&

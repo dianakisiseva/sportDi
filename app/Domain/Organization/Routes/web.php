@@ -35,10 +35,11 @@ Route::prefix('events')
         Route::post('/', 'EventController@store')->name('events.store');
 
         Route::get('/get', 'EventController@get')->name('events.get');
+        Route::get('/get-upcoming-events', 'EventController@getUpcomingEvents')->name('events.getUpcoming');
 
         Route::get('/create', 'EventController@create')->name('events.create');
-        Route::get('{organization}', 'EventController@show')->name('events.show');
-        Route::get('{organization}/edit', 'EventController@edit')->name('events.edit');
-        Route::put('{organization}', 'EventController@update')->name('events.update');
-        Route::delete('{organization}', 'EventController@destroy')->name('events.destroy');
+        Route::get('{event}', 'EventController@show')->name('events.show');
+        Route::get('{event}/edit', 'EventController@edit')->name('events.edit');
+        Route::put('{event}', 'EventController@update')->name('events.update');
+        Route::delete('{event}', 'EventController@destroy')->name('events.destroy');
     });

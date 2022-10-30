@@ -2,6 +2,7 @@
 
 namespace App\Domain\User\Policies;
 
+use App\Domain\User\Models\Activity;
 use App\Domain\User\Models\Role;
 use App\Domain\User\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -17,7 +18,8 @@ class ActivityPolicy
      */
     public function index(User $user)
     {
-        return $user->role_id == Role::ADMIN;
+        return $user->role_id == Role::ADMIN ||
+            $user->role_id == Role::SPORTSMAN;
     }
 
     /**
@@ -25,10 +27,10 @@ class ActivityPolicy
      *
      * @return boolean
      */
-    public function view(User $user)
+    public function view(User $user, Activity $activity)
     {
         return $user->role_id == Role::ADMIN ||
-            $user->id === auth()->user()->id;
+            $activity->user_id === auth()->user()->id;
 
     }
 
@@ -39,7 +41,7 @@ class ActivityPolicy
      */
     public function create(User $user)
     {
-        return $user->role_id == Role::ADMIN;
+        return $user->role_id == Role::SPORTSMAN;
     }
 
     /**
@@ -47,10 +49,10 @@ class ActivityPolicy
      *
      * @return boolean
      */
-    public function update(User $user)
+    public function update(User $user, Activity $activity)
     {
         return $user->role_id == Role::ADMIN ||
-            $user->id === auth()->user()->id;
+            $activity->user_id === auth()->user()->id;
     }
 
     /**
@@ -58,9 +60,9 @@ class ActivityPolicy
      *
      * @return boolean
      */
-    public function delete(User $user)
+    public function delete(User $user, Activity $activity)
     {
         return $user->role_id == Role::ADMIN ||
-            $user->id === auth()->user()->id;
+            $activity->user_id === auth()->user()->id;
     }
 }

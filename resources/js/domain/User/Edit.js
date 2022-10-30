@@ -8,6 +8,7 @@ import UpdatePassword from "./components/UpdatePassword";
 import {useToasts} from "react-toast-notifications";
 import {IconDelete} from "../../components";
 import {IconPen} from "../../components/Icons/Icons";
+import {Inertia} from "@inertiajs/inertia";
 
 export default function View(props) {
     const {t} = useTranslation();
@@ -23,6 +24,26 @@ export default function View(props) {
                 class: 'form-class row'
             },
             fields: [
+                {
+                    element: 'file-dropzone',
+                    dropzone_type: 'json',
+                    name: 'photo',
+                    text: 'Photo',
+                    label: 'Upload file if you want to change the picture',
+                    wrapper: {
+                        element: "div",
+                        class: "col-6 input-width-50"
+                    }
+                },
+                {
+                    element: "text",
+                    text: '',
+                    name: 'placeholder2',
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-6'
+                    }
+                },
                 {
                     element: 'input',
                     type: 'text',
@@ -131,7 +152,7 @@ export default function View(props) {
 
     const handleDeleteAccountSuccessCallback = (res) => {
         modalRef.current.close()
-        window.location.href = '/logout'
+        Inertia.visit()
     }
 
     return <Layout {...props}>
@@ -158,7 +179,7 @@ export default function View(props) {
             </div>
 
             <div className="container-data">
-                <FormBuilder   {...props} useInertia={true} formData={formData}/>
+                <FormBuilder   {...props} useInertia={true} formData={formData} backEndErrors={props.errors}/>
             </div>
 
             <ReactModal ref={modalRef} className='ReactModal__Content--Small'/>

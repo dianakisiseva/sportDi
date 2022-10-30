@@ -2,10 +2,14 @@
 
 namespace App\Domain\Organization\Controllers;
 
+use App\Domain\Bill\Policies\BillPolicy;
 use App\Domain\Organization\BLL\Organization\OrganizationBLLInterface;
+use App\Domain\Organization\Policies\OrganizationPolicy;
+use App\Domain\Organization\Requests\UpdateOrganizationRequest;
 use App\Http\Controllers\Controller;
 use App\Domain\organization\Models\organization;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -27,8 +31,6 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-//        $this->authorize('index', [organization::class]);
-
         return inertia('Organization/Index', [
             'links' => [
                     'show' => route('organizations.show', ['organization' => '%organization%']),
@@ -44,8 +46,6 @@ class OrganizationController extends Controller
 
     public function get()
     {
-//        $this->authorize('index', [organization::class]);
-
         $organizations = $this->organizationBLL->getDatatable();
 
         return DataTables::eloquent($organizations)->make(true);
@@ -53,12 +53,11 @@ class OrganizationController extends Controller
 
     public function show(organization $organization)
     {
-//        $this->authorize('view', [organization::class]);
-
         return inertia('Organization/View', [
             'organization' => $organization,
             'links' => [
                 'edit' => route('organizations.edit', $organization),
+                'delete' => route('organizations.destroy', $organization),
                 'index' => route('organizations.index')
             ]
         ]);
@@ -66,7 +65,7 @@ class OrganizationController extends Controller
 
     public function create()
     {
-//        $this->authorize('create', [Organization::class]);
+        $this->authorize(OrganizationPolicy::CREATE, Organization::class);
 
         return inertia('Organization/Create', [
             'links' => [
@@ -75,10 +74,33 @@ class OrganizationController extends Controller
         ]);
     }
 
-
     public function store(Request $request)
     {
-//        $this->authorize('create', [organization::class]);
+        $this->authorize(OrganizationPolicy::CREATE, Organization::class);
+
+        $this->organizationBLL->createOrganization($request);
+
+        return redirect()->route('organizations.index')
+            ->with('success', 'Organization successfully created!');
+    }
+
+    public function edit(organization $organization)
+    {
+        $this->authorize(OrganizationPolicy::UPDATE, $organization);
+
+        return inertia('Organization/Edit', [
+            'organization' => $organization,
+            'links' => [
+                'update' => route('organizations.update', $organization),
+                'delete' => route('organizations.destroy', $organization),
+                'index' => route('organizations.index')
+            ]
+        ]);
+    }
+
+    public function update(UpdateOrganizationRequest $request,Organization $organization)
+    {
+        $this->authorize(OrganizationPolicy::UPDATE, $organization);
 
         $logo = $request->file('logo');
 
@@ -88,35 +110,12 @@ class OrganizationController extends Controller
             'email' => $request->email,
             'city' => $request->city,
             'facebook' => $request->facebook,
-            'description' => $request->decription,
+            'description' => $request->description,
             'password' => Hash::make($request->password),
-            'logo' =>  $logo ? basename($logo->store('public/uploads/logos')) : null
+            'logo' => $logo ? basename($logo->store('public/uploads/logos')) : null
         ];
 
-        $this->organizationBLL->create($data);
-
-        return redirect()->route('organizations.index')
-            ->with('success', 'Organization successfully created!');
-    }
-
-    public function edit(organization $organization)
-    {
-//        $this->authorize('update',  $organization);
-
-        return inertia('Organization/Edit', [
-            'organization' => $organization,
-            'links' => [
-                'update' => route('organizations.update', $organization),
-                'delete' => route('organizations.destroy', $organization)
-            ]
-        ]);
-    }
-
-    public function update(Request $request,Organization $organization)
-    {
-//        $this->authorize('update',  $organization);
-
-        $this->organizationBLL->update($organization, $request->all());
+        $this->organizationBLL->updateOrganization($organization, $data);
 
         return redirect(route("organizations.show", ['organization' => $organization]))
             ->with('success', 'Organization successfully updated!');
@@ -129,10 +128,10 @@ class OrganizationController extends Controller
      */
     public function destroy(Organization $organization)
     {
-//        $this->authorize('delete',  $organization);
+        $this->authorize(OrganizationPolicy::DELETE, $organization);
 
         try {
-            $this->organizationBLL->delete($organization);
+            $this->organizationBLL->deleteOrganization($organization);
         } catch (\Throwable $tr) {
             throw $tr;
         }

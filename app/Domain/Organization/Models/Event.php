@@ -3,6 +3,7 @@
 namespace App\Domain\Organization\Models;
 
 use App\Traits\CarbonDefaultDateFormat;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,27 +14,24 @@ class Event extends Model
 
     protected $guarded = [];
 
-    public const HIKE = 1;
-    public const BIKE = 2;
-    public const RUN = 3;
-
-    public const CATEGORIES = [
-        self::HIKE => 'Hike',
-        self::BIKE => 'Bike',
-        self::RUN => 'Run',
-    ];
-
     protected $dates = [
         'date',
     ];
 
-    public function user()
+    protected $appends = ['organization_name', 'formatted_date'];
+
+    public function getOrganizationNameAttribute()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->organization->name;
     }
 
-//    public function organization()
-//    {
-//        return $this->belongsTo(User::class, 'user_id');
-//    }
+    public function getFormattedDateAttribute()
+    {
+        return Carbon::parse($this->date)->format('m/d/Y');
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
 }

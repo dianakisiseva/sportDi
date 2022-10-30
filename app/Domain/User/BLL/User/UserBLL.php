@@ -18,7 +18,7 @@ class UserBLL extends BaseBLL implements UserBLLInterface
 
     public function getDatatable()
     {
-        return $this->DAL->query()->select([
+        return $this->DAL->query()->where('is_organization', false)->select([
             'id', 'first_name', 'last_name', 'login', 'email'
         ]);
     }

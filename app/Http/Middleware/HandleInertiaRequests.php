@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Domain\Organization\BLL\Organization\OrganizationBLLInterface;
+use App\Domain\User\Models\Role;
 use App\Domain\User\Models\User;
 //use App\Services\Translator\TranslatorService;
 use Illuminate\Http\Request;
@@ -36,8 +38,22 @@ class HandleInertiaRequests extends Middleware
      *
      * @see https://inertiajs.com/shared-data
      * @param  \Illuminate\Http\Request  $request
-     * @return array
+     * @return string
      */
+    public function getMyProfileLink()
+    {
+        if(!Auth::user()){
+            return null;
+        }
+        $organization = resolve(OrganizationBLLInterface::class)
+            ->getOrganizationByLogin(Auth::user()->login);
+
+        if(Auth::user()->role_id === Role::ORGANIZATION){
+           return route('organizations.show', ['organization' => $organization->id]);
+        }
+        return route('users.show', ['user' => auth()->user()]);
+
+    }
     public function share(Request $request): array
     {
         /** @var User $user */
@@ -51,16 +67,16 @@ class HandleInertiaRequests extends Middleware
            'menu' => [
                'links' => [
                    'home' => route('dashboard'),
-                   'my_profile' => Auth::user() ? route('users.show', ['user' => auth()->user()]) : null,
+                   'my_profile' => $this->getMyProfileLink(),
                    'users' => route('users.index'),
                    'activities' => route('activities.index'),
-                   'organizations' => route('organizations.index')
+                   'organizations' => route('organizations.index'),
+                   'events' => route('events.index')
                ]
            ],
             'url' => [
                 'current' => $request->path(),
                 'current_full' => $request->fullUrl(),
-                'odoo_host' => config('laradoo.host')
             ],
             'auth' => $user
                 ? [

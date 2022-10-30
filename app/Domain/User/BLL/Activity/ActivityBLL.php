@@ -14,18 +14,40 @@ class ActivityBLL extends BaseBLL implements ActivityBLLInterface
         $this->DAL = $activityDAL;
     }
 
-    public function getAllActivities()
+    public function getAllActivities($tab)
     {
-        return $this->DAL->query()->with(['user'])->select([
+        $query = $this->DAL->query()->with(['user'])->select([
             'id', 'category_id', 'name', 'place', 'date', 'distance', 'user_id'
         ]);
+
+        switch ($tab) {
+            case 'hike?draw=1':
+                return $query->where('category_id', Activity::HIKE);
+            case 'bike?draw=1':
+                return $query->where('category_id', Activity::BIKE);
+            case 'run?draw=1':
+                return $query->where('category_id', Activity::RUN);
+            default:
+                return $query;
+        }
     }
 
-    public function getMyActivities()
+    public function getMyActivities($tab)
     {
-        return $this->DAL->query()->select([
+        $query = $this->DAL->query()->select([
             'id', 'category_id', 'name', 'place', 'date', 'distance'
         ])->where('user_id', Auth::user()->id);
+
+        switch ($tab) {
+            case 'hike?draw=1':
+                return $query->where('category_id', Activity::HIKE);
+            case 'bike?draw=1':
+                return $query->where('category_id', Activity::BIKE);
+            case 'run?draw=1':
+                return $query->where('category_id', Activity::RUN);
+            default:
+                return $query;
+        }
     }
 
     public function getCategoriesOptions()

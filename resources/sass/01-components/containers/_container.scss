@@ -4,6 +4,12 @@
     flex-direction: column;
     z-index: 1000; // Fix for NPROGRESS component
 }
+.container-data-header-dash {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 70px;
+}
 
 .container-data {
     &-header {

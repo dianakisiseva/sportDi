@@ -11,15 +11,17 @@ import DeleteAccount from "./components/DeleteAccount";
 import IconTrash from "../../components/Icons/IconTrash";
 import {useToasts} from "react-toast-notifications";
 import {Inertia} from "@inertiajs/inertia";
+import {ROLE} from "../../components/Shared/Constants";
 // import DeleteUserModal from './components/DeleteUserModal'
 
 const Index = (props) => {
     const {t} = useTranslation()
     const modalRef = useRef()
     const tableRef = useRef()
-    const {links} = props
+    const {links, auth} = props
     const {addToast} = useToasts()
 
+    const isAdmin = auth.user.role_id === ROLE.ADMIN;
 
     const columns = useMemo(() => [
         {
@@ -159,7 +161,10 @@ const Index = (props) => {
                             fetchUrl={links.get}
                             initialState={{
                                 pageSize: 50,
-                                hiddenColumns: ['id']
+                                hiddenColumns: ['id'] ,
+                                sortBy: [
+                                    { id: 'id', desc: true }
+                                ],
                             }}
                         />
                     </div>

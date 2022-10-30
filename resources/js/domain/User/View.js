@@ -4,21 +4,20 @@ import {InertiaLink} from "@inertiajs/inertia-react";
 import {IconPen} from "../../components/Icons/Icons";
 import Layout from "../../components/Shared/Layout";
 import BackButton from "../../components/BackButton/BackButton";
+import {ROLE} from "../../components/Shared/Constants";
 
 
 export default function View(props){
-    const { t } = useTranslation();
-    const { user, links } = props;
-    // const userImage =  !!individual.user?.profile_picture ? `url("${individual.user.profile_picture_url}")` : `url("${IconUserDefault}")`;
-    // const showExpertFields = (individual.individual_category_id === props.constants.categories.expert
-    //     || individual.individual_category_id === props.constants.categories.mediator)
-    //     && can("expert-fields.view", individual)
+    const { user, links, auth } = props;
+    const isAdmin = auth.user.role_id === ROLE.ADMIN;
 
     return  <Layout {...props}>
-        <BackButton
-            label='Back to all users'
-            link={links.index}
-        />
+        {isAdmin &&
+            <BackButton
+                label='Back to all users'
+                link={links.index}
+            />
+        }
         <div className="container-data profile">
             <div className="container-data-header">
                 <h5>My profile</h5>
@@ -35,7 +34,7 @@ export default function View(props){
                 <div className="form-group-flex">
                     <div className="form-element-half">
                         <div className="profile-thumb">
-                            <img src="/assets/media/various/profile-placeholder.svg" alt="user thumbnail"/>
+                            <img src={user.photo_url}  alt="user thumbnail"/>
                         </div>
                     </div>
                     <div className="form-element-half">

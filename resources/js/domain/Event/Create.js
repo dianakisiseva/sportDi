@@ -2,8 +2,9 @@ import React, {useMemo} from 'react';
 import Layout from "../../components/Shared/Layout";
 import FormBuilder from "../../components/Form/FormBuilder";
 
+
 export default function Create(props){
-    const { links } = props;
+    const { links, categories } = props;
 
     const formData = useMemo(
         () => ({
@@ -13,27 +14,6 @@ export default function Create(props){
                 class: 'form-class row'
             },
             fields: [
-                {
-                    element: 'file-dropzone',
-                    dropzone_type: 'json',
-                    name: 'logo',
-                    text: 'Logo',
-                    label: 'Logo',
-                    rules: 'required',
-                    wrapper: {
-                        element: "div",
-                        class: "col-6 input-width-50"
-                    }
-                },
-                {
-                    element: "text",
-                    text: '',
-                    name: 'placeholder2',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
                 {
                     element: 'input',
                     type: 'text',
@@ -50,10 +30,10 @@ export default function Create(props){
                 {
                     element: 'input',
                     type: 'text',
-                    name: 'city',
+                    name: 'place',
                     value: '',
-                    label: 'City',
-                    placeholder: 'City',
+                    label: 'Place',
+                    placeholder: 'Place',
                     rules: 'required',
                     wrapper: {
                         element: 'div',
@@ -61,38 +41,11 @@ export default function Create(props){
                     }
                 },
                 {
-                    element: 'input',
-                    name: 'login',
-                    label: 'Login',
-                    placeholder: 'Login',
-                    rules: 'required',
+                    element: 'datepicker',
+                    name: 'date',
                     value: '',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
-                {
-                    element: 'input',
-                    type: 'text',
-                    name: 'email',
-                    value: '',
-                    label: 'Email',
-                    placeholder: 'Email',
-                    rules: 'required',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
-
-                {
-                    element: 'input',
-                    type: 'password',
-                    name: 'password',
-                    value: "",
-                    label: 'Password',
-                    placeholder: 'Password',
+                    label: 'Date',
+                    placeholder: 'Date',
                     rules: 'required',
                     wrapper: {
                         element: 'div',
@@ -100,25 +53,13 @@ export default function Create(props){
                     }
                 },
                 {
-                    element: 'input',
-                    type: 'password',
-                    name: 'password_confirmation',
-                    value: '',
-                    label: 'Password confirmation',
-                    placeholder: 'Password confirmation',
+                    element: 'select',
+                    name: 'category_id',
+                    label: 'Category',
+                    placeholder: 'Category',
                     rules: 'required',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
-                {
-                    element: 'input',
-                    type: 'text',
-                    name: 'facebook',
-                    value: '',
-                    label: 'Facebook link',
-                    placeholder: 'Facebook link',
+                    options: categories,
+                    value: null,
                     wrapper: {
                         element: 'div',
                         class: 'col-6'
@@ -129,6 +70,7 @@ export default function Create(props){
                     name: 'description',
                     label: 'Description',
                     placeholder: 'Description',
+                    rules: 'required',
                     value: '',
                     rows: 4,
                     maxLength: 285,
@@ -138,7 +80,32 @@ export default function Create(props){
                         class: 'col-12'
                     }
                 },
-
+                {
+                    element: 'input',
+                    type: 'text',
+                    name: 'guide',
+                    value: '',
+                    label: 'Guide',
+                    placeholder: 'Guide',
+                    rules: 'required',
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-6'
+                    }
+                },
+                {
+                    element: 'input',
+                    type: 'text',
+                    name: 'contact',
+                    value: '',
+                    label: 'Contact',
+                    placeholder: 'Contact',
+                    rules: 'required',
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-6'
+                    }
+                }
             ],
             submit: {
                 text: 'Create',
@@ -161,7 +128,7 @@ export default function Create(props){
     return  <Layout {...props}>
         <div className="container-data profile">
             <div className="container-data-header">
-                <h5>Create an organization</h5>
+                <h5>Create an event</h5>
                 <div className="container-data-header-buttons">
                 </div>
 

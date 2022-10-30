@@ -3,6 +3,9 @@
 namespace App\Domain\Organization\Controllers;
 
 use App\Domain\Organization\BLL\Event\EventBLLInterface;
+use App\Domain\Organization\BLL\Organization\OrganizationBLLInterface;
+use App\Domain\Organization\Models\Event;
+use App\Domain\Organization\Policies\EventPolicy;
 use App\Domain\User\BLL\Activity\ActivityBLLInterface;
 use App\Domain\User\BLL\User\UserBLLInterface;
 use App\Domain\User\Models\Activity;
@@ -22,6 +25,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 /**
  * @property EventBLLInterface $eventBLL
+ * @property OrganizationBLLInterface $organizationBLL
  */
 class EventController extends Controller
 {
@@ -29,9 +33,11 @@ class EventController extends Controller
     use DataTableUtils;
 
     public function __construct(
-        EventBLLInterface $eventBLL
+        EventBLLInterface $eventBLL,
+        OrganizationBLLInterface $organizationBLL
     ){
         $this->eventBLL = $eventBLL;
+        $this->organizationBLL = $organizationBLL;
     }
 
     /**
@@ -40,73 +46,58 @@ class EventController extends Controller
      */
     public function index()
     {
-//        $this->authorize('index', [User::class]);
-
-        return inertia('Activity/Index', [
+        return inertia('Event/Index', [
             'links' => [
-                    'show' => route('activities.show', ['activity' => '%activity%']),
-                    'edit' => route('activities.edit', ['activity' => '%activity%']),
-                    'create' => route('activities.create'),
-                    'store' => route('activities.store'),
-                    'get' => Auth::user()->role_id == Role::ADMIN
-                        ? route('activities.getAllActivities')
-                        : route('activities.getMyActivities'),
-                    'delete' => route('activities.destroy', ['activity' => '%activity%'])
+                    'show' => route('events.show', ['event' => '%event%']),
+                    'edit' => route('events.edit', ['event' => '%event%']),
+                    'create' => route('events.create'),
+                    'store' => route('events.store'),
+                    'get' => route('events.get'),
+                    'delete' => route('events.destroy', ['event' => '%event%']),
+                    'showOrganization' => route('organizations.show', ['organization' => '%organization%']),
                 ],
-            'categories' => $this->activityBLL->getCategoriesOptions()
+            'categories' => $this->eventBLL->getCategoriesOptions()
+
 
         ]);
     }
 
-    public function getAllActivities()
+    public function get()
     {
-//        $this->authorize('index', [User::class]);
+        $events = $this->eventBLL->getAllEvents();
 
-        $activities = $this->activityBLL->getAllActivities();
-
-        return DataTables::eloquent($activities)
-            ->filter(function ($query) {
-                $this->filterMultipleColumns($query);
-                $this->filterCustomRule($query);
-            }, true)
-            ->make(true);
-
-        return DataTables::eloquent($activities)->make(true);
+        return DataTables::eloquent($events)->make(true);
     }
 
-    public function getMyActivities()
+    public function getUpcomingEvents()
     {
-//        $this->authorize('index', [User::class]);
+        $events = $this->eventBLL->getUpcomingEvents();
 
-        $activities = $this->activityBLL->getMyActivities();
-
-
-        return DataTables::eloquent($activities)->make(true);
+        return DataTables::eloquent($events)->make(true);
     }
 
-
-    public function show(Activity $activity)
+    public function show(Event $event)
     {
-//        $this->authorize('view', [User::class]);
+        $event->load('organization');
 
-        return inertia('Activity/View', [
-            'activity' => $activity,
+        return inertia('Event/View', [
+            'event' => $event,
             'links' => [
-                'edit' => route('activities.edit', $activity),
-                'index' => route('activities.index')
+                'edit' => route('events.edit', $event),
+                'index' => route('events.index')
             ]
         ]);
     }
 
     public function create()
     {
-//        $this->authorize('create', [User::class]);
+        $this->authorize(EventPolicy::CREATE, Event::class);
 
-        return inertia('Activity/Create', [
+        return inertia('Event/Create', [
             'links' => [
-                'store' => route('activities.store')
+                'store' => route('events.store')
             ],
-            'categories' => $this->activityBLL->getCategoriesOptions()
+            'categories' => $this->eventBLL->getCategoriesOptions()
         ]);
     }
 
@@ -117,68 +108,61 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-//        $this->authorize('create', [User::class]);
+        $this->authorize(EventPolicy::CREATE, Event::class);
 
-        $data = $request->except(['submitBtn', 'organized_by']);
-        $data['user_id'] = Auth::user()->id;
-        $data['date'] = Carbon::parse($request->date)->format('d-m-Y');
+        $data = $request->except(['submitBtn']);
 
-        if($request->organized_by){
-            $data['organization_id'] = $request->organization_id;
-        }
+        $organization = $this->organizationBLL->getOrganizationByLogin(Auth::user()->login);
+        $data['organization_id'] = $organization->id ?? 1;
+        $data['date'] = Carbon::parse($request->date)->addDay(1)->format('d-m-Y');
 
-        $this->activityBLL->create($data);
+        $this->eventBLL->create($data);
 
-        return redirect()->route('activities.index')
-            ->with('success', 'Activity successfully created!');
+        return redirect()->route('events.index')
+            ->with('success', 'Event successfully created!');
     }
 
-    public function edit(Activity $activity)
+    public function edit(Event $event)
     {
-//        $this->authorize('update',  $activity);
+        $this->authorize(EventPolicy::UPDATE, $event->load('organization'));
 
-        return inertia('Activity/Edit', [
-            'activity' => $activity,
+        return inertia('Event/Edit', [
+            'event' => $event,
             'links' => [
-                'update' => route('activities.update', $activity),
-                'delete' => route('activities.destroy', $activity)
+                'update' => route('events.update', $event),
+                'delete' => route('events.destroy', $event)
             ],
-            'categories' => $this->activityBLL->getCategoriesOptions()
+            'categories' => $this->eventBLL->getCategoriesOptions()
 
         ]);
     }
 
-    public function update(Request $request, Activity $activity)
+    public function update(Request $request, Event $event)
     {
-//        $this->authorize('update',  $user);
+        $this->authorize(EventPolicy::UPDATE, $event->load('organization'));
 
-        $data = $request->except(['submitBtn', 'organized_by']);
-        $data['user_id'] = Auth::user()->id;
-        $data['date'] = Carbon::parse($request->date)->format('d-m-Y');
+        $data = $request->except(['submitBtn', 'organization_name']);
+        $data['date'] = Carbon::parse($request->date)->addDay(1)->format('d-m-Y');
 
-        if($request->organized_by){
-            $data['organization_id'] = $request->organization_id;
-        }
+        $this->eventBLL->update($event, $data);
 
-        $this->activityBLL->update($activity, $data);
-
-        return redirect(route("activities.show", ['activity' => $activity]))
-            ->with('success', 'Activity successfully updated!');
+        return redirect(route("events.show", ['event' => $event]))
+            ->with('success', 'Event successfully updated!');
     }
 
 
-    public function destroy(Activity $activity)
+    public function destroy(Event $event)
     {
-//        $this->authorize('delete',  $user);
+        $this->authorize(EventPolicy::DELETE, $event);
 
         try {
-            $this->activityBLL->delete($activity);
+            $this->eventBLL->delete($event);
         } catch (\Throwable $tr) {
             throw $tr;
         }
 
         return response()->json([
-            'message' => 'Activity successfully deleted!'
+            'message' => 'Event successfully deleted!'
         ]);
     }
 

@@ -3,14 +3,14 @@ import axios from 'axios'
 import {usePage} from "@inertiajs/inertia-react";
 import {route} from "../../utils";
 
-const DeleteActivity = ({cancelCallback, successCallback, id}) => {
+const DeleteOrganization = ({cancelCallback, successCallback, id}) => {
     const { links } = usePage().props
 
 
     const submit = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.delete(route(links.delete, { activity: id }))
+            const res = await axios.delete(route(links.delete, { organization: id }))
             if (res.status === 200) {
                 successCallback()
             }
@@ -21,7 +21,8 @@ const DeleteActivity = ({cancelCallback, successCallback, id}) => {
     return (
         <div className='select-input input-element'>
             <div>
-                <p>Are you sure you want to delete this activity?</p>
+                <p>Are you sure you want to delete this organization?</p>
+                <p>If there are events connected with this organization, they will be deleted too.</p>
                 <div className='form-footer'>
                     <button className='btn-tertiary' onClick={cancelCallback}>Cancel</button>
                     <button type='button' onClick={(e) => submit(e)} className='btn-primary'>Confirm</button>
@@ -31,4 +32,4 @@ const DeleteActivity = ({cancelCallback, successCallback, id}) => {
     )
 }
 
-export default DeleteActivity
+export default DeleteOrganization

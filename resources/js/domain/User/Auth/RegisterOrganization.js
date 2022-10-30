@@ -1,26 +1,16 @@
-import React, {useMemo, useRef} from 'react';
-import {useTranslation} from 'react-i18next';
-import Layout from "../../components/Shared/Layout";
-import ReactModal from "../../components/Modal/ReactModal";
-import FormBuilder from "../../components/Form/FormBuilder";
-import {useToasts} from "react-toast-notifications";
-import {IconDelete} from "../../components";
-import {IconPen} from "../../components/Icons/Icons";
-import {format} from "date-fns";
-import moment from "moment";
-import {formatDate, route} from "../../utils";
-import {CATEGORIES} from "../../components/Shared/Constants";
+import React, {useMemo} from 'react';
+import {FormBuilder, Layout} from "../../../components";
+import PublicLayout from "../../../components/Shared/PublicLayout";
 
-export default function View(props) {
-    const {t} = useTranslation();
-    const {organization, links, auth, categories} = props;
-    const {addToast} = useToasts()
+export default function RegisterUser(props){
+    const { links } = props;
 
+    console.log(props)
     const formData = useMemo(
         () => ({
             form: {
-                url: links.update,
-                method: 'put',
+                url: links.registerOrganization,
+                method: 'post',
                 class: 'form-class row'
             },
             fields: [
@@ -29,7 +19,8 @@ export default function View(props) {
                     dropzone_type: 'json',
                     name: 'logo',
                     text: 'Logo',
-                    label: 'Upload file if you want to change the logo',
+                    label: 'Logo',
+                    rules: 'required',
                     wrapper: {
                         element: "div",
                         class: "col-6 input-width-50"
@@ -50,7 +41,20 @@ export default function View(props) {
                     name: 'name',
                     label: 'Name',
                     placeholder: 'Name',
-                    value: organization.name ?? '',
+                    value: '',
+                    rules: 'required',
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-6'
+                    }
+                },
+                {
+                    element: 'input',
+                    type: 'text',
+                    name: 'city',
+                    value: '',
+                    label: 'City',
+                    placeholder: 'City',
                     rules: 'required',
                     wrapper: {
                         element: 'div',
@@ -63,7 +67,7 @@ export default function View(props) {
                     label: 'Login',
                     placeholder: 'Login',
                     rules: 'required',
-                    value:  organization.login ?? '',
+                    value: '',
                     wrapper: {
                         element: 'div',
                         class: 'col-6'
@@ -73,7 +77,7 @@ export default function View(props) {
                     element: 'input',
                     type: 'text',
                     name: 'email',
-                    value: organization.email ?? '',
+                    value: '',
                     label: 'Email',
                     placeholder: 'Email',
                     rules: 'required',
@@ -82,13 +86,27 @@ export default function View(props) {
                         class: 'col-6'
                     }
                 },
+
                 {
                     element: 'input',
-                    type: 'text',
-                    name: 'city',
-                    value: organization.city ?? '',
-                    label: 'City',
-                    placeholder: 'City',
+                    type: 'password',
+                    name: 'password',
+                    value: "",
+                    label: 'Password',
+                    placeholder: 'Password',
+                    rules: 'required',
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-6'
+                    }
+                },
+                {
+                    element: 'input',
+                    type: 'password',
+                    name: 'password_confirmation',
+                    value: '',
+                    label: 'Password confirmation',
+                    placeholder: 'Password confirmation',
                     rules: 'required',
                     wrapper: {
                         element: 'div',
@@ -99,27 +117,12 @@ export default function View(props) {
                     element: 'input',
                     type: 'text',
                     name: 'facebook',
-                    value: organization.facebook ?? '',
+                    value: '',
                     label: 'Facebook link',
                     placeholder: 'Facebook link',
                     wrapper: {
                         element: 'div',
                         class: 'col-6'
-                    },
-                    Cell: ({row}) => {
-                        console.log(organization.facebook)
-                        return <a
-                            href={organization.facebook}
-                            target='_blank'
-                            rel='noreferrer'
-
-                        >
-                            {organization.name}
-                        </a>
-                        //
-                        // <a href="https://google.com" target="_blank" rel="noreferrer">
-                        //     Google.com
-                        // </a>
                     }
                 },
                 {
@@ -127,7 +130,7 @@ export default function View(props) {
                     name: 'description',
                     label: 'Description',
                     placeholder: 'Description',
-                    value: organization.description ?? '',
+                    value: '',
                     rows: 4,
                     maxLength: 285,
                     counter: true,
@@ -139,7 +142,7 @@ export default function View(props) {
 
             ],
             submit: {
-                text: 'Edit',
+                text: 'Register',
                 class: "btn-primary",
                 wrapper: {
                     element: "div",
@@ -156,10 +159,11 @@ export default function View(props) {
     )
 
 
-    return <Layout {...props}>
+    return  <PublicLayout {...props}>
+        <div className="container">
         <div className="container-data profile">
             <div className="container-data-header">
-                <h5>Edit</h5>
+                <h5>Register</h5>
                 <div className="container-data-header-buttons">
                 </div>
 
@@ -169,5 +173,6 @@ export default function View(props) {
                 <FormBuilder   {...props} useInertia={true} formData={formData} backEndErrors={props.errors}/>
             </div>
         </div>
-    </Layout>
+        </div>
+    </PublicLayout>
 }

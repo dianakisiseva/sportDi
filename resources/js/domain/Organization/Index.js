@@ -1,17 +1,13 @@
 import React, {useMemo, useRef} from 'react'
 import {useTranslation} from 'react-i18next'
 import {DataTable, ReactModal, SelectColumnFilter} from '../../components'
-// import CreateUserModal from './components/CreateUserModal'
 import {InertiaLink, usePage} from '@inertiajs/inertia-react'
-// import UpdatePasswordModal from './components/UpdatePasswordModal'
 import Layout from '../../components/Shared/Layout'
-import {IconDelete, IconPen, IconShape} from "../../components/Icons/Icons";
 import {route} from "../../utils";
 import {useToasts} from "react-toast-notifications";
-import {CATEGORIES, ROLE} from "../../components/Shared/Constants";
-import IconTrash from "../../components/Icons/IconTrash";
-import DeleteAccount from "../User/components/DeleteAccount";
-import DeleteActivity from "./DeleteActivity";
+import  {ROLE} from "../../components/Shared/Constants";
+import DeleteActivity from "../Activity/DeleteActivity";
+
 
 
 const Index = (props) => {
@@ -56,7 +52,7 @@ const Index = (props) => {
             orderable: true,
             disableSortBy: false,
             searchable: false,
-            disableFilters: true
+            disableFilters: true,
         },
         {
             id: 'name',
@@ -67,12 +63,21 @@ const Index = (props) => {
             orderable: true,
             disableSortBy: false,
             searchable: true,
-            disableFilters: true
+            disableFilters: true,
+            Cell: ({ value, row }) => {
+                return (
+                    <InertiaLink className={`bold-font`}
+                        href={route(links.show, { organization: row.original.id })}
+                    >
+                        {value}
+                    </InertiaLink>
+                )
+            }
         },
         ...(isAdmin ? [
             {
                 id: 'login',
-                Header: 'User login',
+                Header: 'Login',
                 accessor: 'login',
                 name: 'login',
                 search: {value: '', regex: 'false'},
@@ -106,51 +111,8 @@ const Index = (props) => {
             disableSortBy: false,
             searchable: true,
             disableFilters: true
-        },
-        {
-            id: 'facebook',
-            Header: 'Facebook link',
-            accessor: 'facebook',
-            name: 'facebook',
-            search: {value: '', regex: 'false'},
-            orderable: true,
-            disableSortBy: false,
-            searchable: true,
-            disableFilters: true
-        },
+        }
 
-        // {
-        //     id: 'actions',
-        //     Header: 'Actions',
-        //     accessor: 'actions',
-        //     name: 'actions',
-        //     search: {value: '', regex: 'false'},
-        //     orderable: false,
-        //     disableSortBy: true,
-        //     searchable: false,
-        //     disableFilters: true,
-        //     Cell: ({row}) => {
-        //         return (
-        //             <>
-        //                 <div className="rt-btn-wrapper">
-        //                     <InertiaLink className="btn-stripped"
-        //                                  href={route(links.show, {activity: row.original.id})}>
-        //                         <IconShape/>
-        //                     </InertiaLink>
-        //                     <InertiaLink className="btn-stripped"
-        //                                  href={route(links.edit, {activity: row.original.id})}>
-        //                         <IconPen/>
-        //                     </InertiaLink>
-        //                     <button
-        //                         className="btn-stripped-sm"
-        //                         onClick={() => handleDeleteAccount(row.original.id)}>
-        //                         <IconTrash/>
-        //                     </button>
-        //                 </div>
-        //             </>
-        //         )
-        //     }
-        // }
 
     ], [])
 
@@ -177,7 +139,11 @@ const Index = (props) => {
                             ref={tableRef}
                             fetchUrl={links.get}
                             initialState={{
-                                pageSize: 50
+                                pageSize: 50,
+                                hiddenColumns: ['id'],
+                                sortBy: [
+                                    { id: 'id', desc: true }
+                                ],
                             }}
                         />
                     </div>

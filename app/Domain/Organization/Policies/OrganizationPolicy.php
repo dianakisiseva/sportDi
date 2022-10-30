@@ -2,6 +2,7 @@
 
 namespace App\Domain\Organization\Policies;
 
+use App\Domain\Organization\Models\Organization;
 use App\Domain\User\Models\Role;
 use App\Domain\User\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -10,6 +11,11 @@ class OrganizationPolicy
 {
     use HandlesAuthorization;
 
+    public const CREATE = 'create';
+    public const UPDATE = 'update';
+    public const DELETE = 'delete';
+
+
     /**
      * Determine whether the user can view any models.
      *
@@ -17,7 +23,7 @@ class OrganizationPolicy
      */
     public function index(User $user)
     {
-        return $user->role_id == Role::ADMIN;
+        return true;
     }
 
     /**
@@ -27,8 +33,7 @@ class OrganizationPolicy
      */
     public function view(User $user)
     {
-        return $user->role_id == Role::ADMIN ||
-            $user->id === auth()->user()->id;
+        return true;
 
     }
 
@@ -39,7 +44,8 @@ class OrganizationPolicy
      */
     public function create(User $user)
     {
-        return $user->role_id == Role::ADMIN;
+        return $user->role_id == Role::ADMIN ||
+            $user->role_id == Role::ORGANIZATION;
     }
 
     /**
@@ -47,10 +53,10 @@ class OrganizationPolicy
      *
      * @return boolean
      */
-    public function update(User $user)
+    public function update(User $user, Organization $organization)
     {
         return $user->role_id == Role::ADMIN ||
-            $user->id === auth()->user()->id;
+            $organization->email === auth()->user()->email;
     }
 
     /**
@@ -58,9 +64,9 @@ class OrganizationPolicy
      *
      * @return boolean
      */
-    public function delete(User $user)
+    public function delete(User $user, Organization $organization)
     {
         return $user->role_id == Role::ADMIN ||
-            $user->id === auth()->user()->id;
+            $organization->email === auth()->user()->email;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Domain\User\Models;
 
 use App\Traits\CarbonDefaultDateFormat;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +27,13 @@ class Activity extends Model
     protected $dates = [
         'date',
     ];
+
+    protected $appends = ['formatted_date'];
+
+    public function getFormattedDateAttribute()
+    {
+        return Carbon::parse($this->date)->format('m/d/Y');
+    }
 
     public function user()
     {

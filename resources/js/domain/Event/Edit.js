@@ -8,14 +8,15 @@ import {IconDelete} from "../../components";
 import {IconPen} from "../../components/Icons/Icons";
 import {format} from "date-fns";
 import moment from "moment";
-import {formatDate, route} from "../../utils";
+import {formatDate} from "../../utils";
 import {CATEGORIES} from "../../components/Shared/Constants";
 
 export default function View(props) {
     const {t} = useTranslation();
-    const {organization, links, auth, categories} = props;
+    const {event, links, auth, categories} = props;
     const {addToast} = useToasts()
 
+    console.log(event)
     const formData = useMemo(
         () => ({
             form: {
@@ -25,57 +26,12 @@ export default function View(props) {
             },
             fields: [
                 {
-                    element: 'file-dropzone',
-                    dropzone_type: 'json',
-                    name: 'logo',
-                    text: 'Logo',
-                    label: 'Upload file if you want to change the logo',
-                    wrapper: {
-                        element: "div",
-                        class: "col-6 input-width-50"
-                    }
-                },
-                {
-                    element: "text",
-                    text: '',
-                    name: 'placeholder2',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
-                {
                     element: 'input',
                     type: 'text',
                     name: 'name',
                     label: 'Name',
                     placeholder: 'Name',
-                    value: organization.name ?? '',
-                    rules: 'required',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
-                {
-                    element: 'input',
-                    name: 'login',
-                    label: 'Login',
-                    placeholder: 'Login',
-                    rules: 'required',
-                    value:  organization.login ?? '',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
-                {
-                    element: 'input',
-                    type: 'text',
-                    name: 'email',
-                    value: organization.email ?? '',
-                    label: 'Email',
-                    placeholder: 'Email',
+                    value: event.name ?? '',
                     rules: 'required',
                     wrapper: {
                         element: 'div',
@@ -85,10 +41,10 @@ export default function View(props) {
                 {
                     element: 'input',
                     type: 'text',
-                    name: 'city',
-                    value: organization.city ?? '',
-                    label: 'City',
-                    placeholder: 'City',
+                    name: 'place',
+                    value: event.place ?? '',
+                    label: 'Place',
+                    placeholder: 'Place',
                     rules: 'required',
                     wrapper: {
                         element: 'div',
@@ -96,47 +52,87 @@ export default function View(props) {
                     }
                 },
                 {
-                    element: 'input',
+                    element: 'datepicker',
                     type: 'text',
-                    name: 'facebook',
-                    value: organization.facebook ?? '',
-                    label: 'Facebook link',
-                    placeholder: 'Facebook link',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    },
-                    Cell: ({row}) => {
-                        console.log(organization.facebook)
-                        return <a
-                            href={organization.facebook}
-                            target='_blank'
-                            rel='noreferrer'
+                    name: 'date',
+                    value: new Date(event.formatted_date),
+                    // value: '',
+                    label: 'Date',
+                    placeholder: 'Date',
+                    rules: 'required',
+                    disabled:true,
 
-                        >
-                            {organization.name}
-                        </a>
-                        //
-                        // <a href="https://google.com" target="_blank" rel="noreferrer">
-                        //     Google.com
-                        // </a>
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-6'
                     }
+                },
+                {
+                    element: 'select',
+                    name: 'category_id',
+                    label: 'Category',
+                    placeholder: 'Category',
+                    rules: 'required',
+                    options: categories,
+                    value: event.category_id ?? '',
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-6'
+                    }
+                },
+                {
+                    element: 'input',
+                    type: 'text',
+                    name: 'organization_name',
+                    value: event.organization_name ?? '',
+                    label: 'Organized by',
+                    disabled: true,
+                    rules: 'required',
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-12'
+                    },
                 },
                 {
                     element: 'textarea',
                     name: 'description',
                     label: 'Description',
                     placeholder: 'Description',
-                    value: organization.description ?? '',
+                    value: event.description ?? '',
                     rows: 4,
                     maxLength: 285,
                     counter: true,
                     wrapper: {
                         element: 'div',
                         class: 'col-12'
+                    },
+                },
+                {
+                    element: 'input',
+                    type: 'text',
+                    name: 'guide',
+                    value: event.guide ?? '',
+                    label: 'Guide',
+                    placeholder: 'Guide',
+                    rules: 'required',
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-6'
                     }
                 },
-
+                {
+                    element: 'input',
+                    type: 'text',
+                    name: 'contact',
+                    value: event.contact ?? '',
+                    label: 'Contact',
+                    placeholder: 'Contact',
+                    rules: 'required',
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-6'
+                    }
+                },
             ],
             submit: {
                 text: 'Edit',
@@ -156,7 +152,7 @@ export default function View(props) {
     )
 
 
-    return <Layout {...props}>
+    return  <Layout {...props}>
         <div className="container-data profile">
             <div className="container-data-header">
                 <h5>Edit</h5>
@@ -166,7 +162,7 @@ export default function View(props) {
             </div>
 
             <div className="container-data">
-                <FormBuilder   {...props} useInertia={true} formData={formData} backEndErrors={props.errors}/>
+                <FormBuilder   {...props} useInertia={true} formData={formData}/>
             </div>
         </div>
     </Layout>

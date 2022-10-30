@@ -2,7 +2,6 @@
 
 namespace App\Domain\User\Models;
 
-use App\Domain\Mission\Models\MissionLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -26,7 +25,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
-        'photo'
+        'photo',
+        'is_organization'
     ];
 
     /**
@@ -55,8 +55,7 @@ class User extends Authenticatable
         if (empty($this->photo)) {
             return asset('assets/media/various/profile-placeholder.svg');
         }
-
-        return 'uploads/profile-pictures/' . $this->photo;
+        return "/storage/uploads/profile-pictures/" . $this->photo;
     }
 
     public function role()

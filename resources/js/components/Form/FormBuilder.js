@@ -366,7 +366,7 @@ const FormBuilder = forwardRef((props, ref) => {
 
               <button
                 className={formData.submit.class}
-                type='submit' disabled={isSubmitting || formData.submit.disabled}
+                type='submit'
                 onClick={(e) => {
                   setFieldValue('submitBtn', '')
                   if (formData.submit.confirm && formData.submit.confirm(values)) {

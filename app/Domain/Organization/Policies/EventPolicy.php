@@ -2,6 +2,7 @@
 
 namespace App\Domain\Organization\Policies;
 
+use App\Domain\Organization\Models\Event;
 use App\Domain\User\Models\Role;
 use App\Domain\User\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -10,6 +11,10 @@ class EventPolicy
 {
     use HandlesAuthorization;
 
+    public const CREATE = 'create';
+    public const UPDATE = 'update';
+    public const DELETE = 'delete';
+
     /**
      * Determine whether the user can view any models.
      *
@@ -17,7 +22,7 @@ class EventPolicy
      */
     public function index(User $user)
     {
-        return $user->role_id == Role::ADMIN;
+        return true;
     }
 
     /**
@@ -27,8 +32,7 @@ class EventPolicy
      */
     public function view(User $user)
     {
-        return $user->role_id == Role::ADMIN ||
-            $user->id === auth()->user()->id;
+        return true;
 
     }
 
@@ -39,7 +43,7 @@ class EventPolicy
      */
     public function create(User $user)
     {
-        return $user->role_id == Role::ADMIN;
+        return $user->role_id == Role::ORGANIZATION;
     }
 
     /**
@@ -47,10 +51,10 @@ class EventPolicy
      *
      * @return boolean
      */
-    public function update(User $user)
+    public function update(User $user, Event $event)
     {
         return $user->role_id == Role::ADMIN ||
-            $user->id === auth()->user()->id;
+            $event->organization->email === auth()->user()->email;
     }
 
     /**
@@ -58,9 +62,9 @@ class EventPolicy
      *
      * @return boolean
      */
-    public function delete(User $user)
+    public function delete(User $user, Event $event)
     {
         return $user->role_id == Role::ADMIN ||
-            $user->id === auth()->user()->id;
+            $event->organization->email === auth()->user()->email;
     }
 }

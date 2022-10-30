@@ -12,7 +12,8 @@ import DropdownMenu from "../Utility/DropdownMenu";
 import {selectOptions, selectValue} from "../utils/select_options";
 import Logo from "../../../assets/media/logos/sportDi-logo.png";
 import LogoWide from "../../../assets/media/logos/sportDi-logo-wide.png";
-import {IconProfile} from "../Icons";
+import { IconProfile} from "../Icons";
+import IconEye from "../Icons/IconEye";
 
 export default function HeaderPrime({url, localization, auth, menu}) {
 
@@ -29,19 +30,13 @@ export default function HeaderPrime({url, localization, auth, menu}) {
                         <ul className="user-options-quicklinks">
                             <li>
                                 <Link href={menu?.links.my_profile}>
+                                    <IconEye />
                                     <span>My Profile</span>
                                 </Link>
                             </li>
                         </ul>
-                        <div className="user-options-profile">
-                            {/*<Link href={menu?.links.profile} method="get">*/}
-                            {/*    <IconProfile className="icon-profile" />*/}
-                            {/*    <span>{t("common.page.my-profile")}</span>*/}
-                            {/*</Link>*/}
-                        </div>
                     </>
                     }
-
                     { isLoggedIn && <InertiaLink
                         className="logout btn-stripped"
                         href="/logout" method="get" as="button"><IconLogout /></InertiaLink>}
@@ -50,10 +45,9 @@ export default function HeaderPrime({url, localization, auth, menu}) {
 
             <div className="branding">
                 <div className="container">
-                    <Link className="branding-logo" href="/home" url={url}>
-                        <img src={brandLogo} alt="Batilex Logo" />
+                    <Link className="branding-logo" href="/" url={url}>
+                        <img src={brandLogo} alt="Logo" />
                     </Link>
-                    {isMenuExpanded && <h1>SportDi</h1>}
                 </div>
             </div>
         </header>

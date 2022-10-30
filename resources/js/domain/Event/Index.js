@@ -7,37 +7,37 @@ import {route} from "../../utils";
 import {useToasts} from "react-toast-notifications";
 import {CATEGORIES, ROLE} from "../../components/Shared/Constants";
 import IconTrash from "../../components/Icons/IconTrash";
-import DeleteActivity from "./DeleteActivity";
+import DeleteEvent from "./DeleteEvent";
 
 
 const Index = (props) => {
     const modalRef = useRef()
     const tableRef = useRef()
-    const {links, categories, auth} = props
+    const {links, events, auth, categories} = props
     const {addToast} = useToasts()
-    const isAdmin = auth.user.role_id === ROLE.ADMIN;
+    const isOrganization = auth.user.role_id === ROLE.ORGANIZATION;
 
-    const handleDeleteAccount = (id) => {
-        const title = 'Delete activity'
+    const handleDeleteEvent = (id) => {
+        const title = 'Delete event'
 
         const body =
-            <DeleteActivity
-                cancelCallback={handleDeleteAccountCancelCallback}
-                successCallback={handleDeleteAccountSuccessCallback}
+            <DeleteEvent
+                cancelCallback={handleDeleteEventCancelCallback}
+                successCallback={handleDeleteEventSuccessCallback}
                 id={id}
             />
 
         modalRef.current.setContent(title, body)
     }
 
-    const handleDeleteAccountCancelCallback = () => {
+    const handleDeleteEventCancelCallback = () => {
         modalRef.current.close()
     }
 
-    const handleDeleteAccountSuccessCallback = (res) => {
+    const handleDeleteEventSuccessCallback = (res) => {
         modalRef.current.close()
         tableRef.current.reload()
-        addToast('Activity successfully deleted', {appearance: 'success'})
+        addToast('Event successfully deleted', {appearance: 'success'})
 
     }
 
@@ -52,34 +52,6 @@ const Index = (props) => {
             disableSortBy: false,
             searchable: false,
             disableFilters: true
-        },
-        ...(isAdmin ? [
-            {
-                id: 'login',
-                Header: 'User login',
-                accessor: 'login',
-                name: 'login',
-                search: {value: '', regex: 'false'},
-                orderable: true,
-                disableSortBy: false,
-                searchable: false,
-                disableFilters: true,
-                Cell: ({ row }) => {return row.original.user.login}
-            }
-            ] : []),
-
-        {
-            id: 'category_id',
-            Header: 'Category',
-            accessor: 'category_id',
-            name: 'category_id',
-            search: {value: '', regex: 'false'},
-            orderable: true,
-            disableSortBy: false,
-            searchable: true,
-            disableFilters: true,
-            Cell: ({ value }) => {return CATEGORIES[value]}
-
         },
         {
             id: 'name',
@@ -115,15 +87,41 @@ const Index = (props) => {
             disableFilters: true
         },
         {
-            id: 'distance',
-            Header: 'Distance',
-            accessor: 'distance',
-            name: 'distance',
+            id: 'category_id',
+            Header: 'Category',
+            accessor: 'category_id',
+            name: 'category_id',
             search: {value: '', regex: 'false'},
             orderable: true,
             disableSortBy: false,
             searchable: true,
-            disableFilters: true
+            disableFilters: true,
+            // filterComponent: SelectColumnFilter,
+            // filterSettings: {
+            //     options: categories
+            // },
+            Cell: ({ value }) => {return CATEGORIES[value]}
+        },
+        {
+            id: 'organization_name',
+            Header: 'Organization',
+            accessor: 'organization_name',
+            name: 'organization_name',
+            search: {value: '', regex: 'false'},
+            orderable: true,
+            disableSortBy: false,
+            searchable: true,
+            disableFilters: true,
+            Cell: ({ value, row }) => {
+                return (
+                    <InertiaLink className={`bold-font`}
+                                 href={route(links.showOrganization,
+                                     { organization: row.original.organization.id })}
+                    >
+                        {value}
+                    </InertiaLink>
+                )
+            }
         },
         {
             id: 'actions',
@@ -140,18 +138,22 @@ const Index = (props) => {
                     <>
                         <div className="rt-btn-wrapper">
                             <InertiaLink className="btn-stripped"
-                                         href={route(links.show, {activity: row.original.id})}>
+                                         href={route(links.show, {event: row.original.id})}>
                                 <IconShape/>
                             </InertiaLink>
+                            {auth.user.role_id === ROLE.ADMIN ||
+                                auth.user.email === row.original.organization.email && <>
                             <InertiaLink className="btn-stripped"
-                                         href={route(links.edit, {activity: row.original.id})}>
+                                         href={route(links.edit, {event: row.original.id})}>
                                 <IconPen/>
                             </InertiaLink>
                             <button
                                 className="btn-stripped"
-                                onClick={() => handleDeleteAccount(row.original.id)}>
+                                onClick={() => handleDeleteEvent(row.original.id)}>
                                 <IconDeleteBin/>
                             </button>
+                            </>
+                            }
                         </div>
                     </>
                 )
@@ -164,14 +166,11 @@ const Index = (props) => {
         <Layout {...props}>
             <div className="container-data profile">
                 <div className="container-data-header">
-                    {isAdmin ?
-                        <h5>All activities</h5> :
-                        <h5>My activities</h5>
-                    }
+                    <h5>Events</h5>
                     <div className="container-data-header-buttons">
-                        {!isAdmin &&
+                        {isOrganization &&
                         <InertiaLink className="btn-primary" href={props.links.create}>
-                            Add activity
+                            Add event
                         </InertiaLink>
                         }
                     </div>
@@ -188,7 +187,7 @@ const Index = (props) => {
                                 pageSize: 50,
                                 hiddenColumns: ['id'],
                                 sortBy: [
-                                    { id: 'id', desc: true }
+                                    { id: 'date', asc: true }
                                 ],
                             }}
                         />

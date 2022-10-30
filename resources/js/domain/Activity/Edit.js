@@ -63,13 +63,11 @@ export default function View(props) {
                         class: 'col-6'
                     }
                 },
-                //todo: datepicker
                 {
                     element: 'datepicker',
                     type: 'text',
                     name: 'date',
-                    // value: new Date(activity.date),
-                    value: '',
+                    value: new Date(activity.formatted_date),
                     label: 'Date',
                     placeholder: 'Date',
                     rules: 'required',
@@ -182,7 +180,11 @@ export default function View(props) {
                     value: activity.description ?? '',
                     rows: 4,
                     maxLength: 285,
-                    counter: true
+                    counter: true,
+                    wrapper: {
+                        element: 'div',
+                        class: 'col-12'
+                    },
                 },
 
             ],
