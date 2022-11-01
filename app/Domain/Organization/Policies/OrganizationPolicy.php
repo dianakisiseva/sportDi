@@ -44,8 +44,7 @@ class OrganizationPolicy
      */
     public function create(User $user)
     {
-        return $user->role_id == Role::ADMIN ||
-            $user->role_id == Role::ORGANIZATION;
+        return $user->role_id == Role::ORGANIZATION;
     }
 
     /**
@@ -70,3 +69,6 @@ class OrganizationPolicy
             $organization->email === auth()->user()->email;
     }
 }
+
+
+

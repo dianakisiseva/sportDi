@@ -52,8 +52,8 @@ Route::prefix('activities')
         Route::get('/', 'ActivityController@index')->name('activities.index');
         Route::post('/', 'ActivityController@store')->name('activities.store');
 
-        Route::get('/get-all', 'ActivityController@getAllActivities')->name('activities.getAllActivities');
-        Route::get('/get-my', 'ActivityController@getMyActivities')->name('activities.getMyActivities');
+        Route::get('/get-all/{tab?}', 'ActivityController@getAllActivities')->name('activities.getAllActivities');
+        Route::get('/get-my/{tab?}', 'ActivityController@getMyActivities')->name('activities.getMyActivities');
 
         Route::get('/create', 'ActivityController@create')->name('activities.create');
         Route::get('{activity}', 'ActivityController@show')->name('activities.show');

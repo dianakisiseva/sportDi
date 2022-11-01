@@ -21,11 +21,11 @@ class ActivityBLL extends BaseBLL implements ActivityBLLInterface
         ]);
 
         switch ($tab) {
-            case 'hike?draw=1':
+            case 'hike':
                 return $query->where('category_id', Activity::HIKE);
-            case 'bike?draw=1':
+            case 'bike':
                 return $query->where('category_id', Activity::BIKE);
-            case 'run?draw=1':
+            case 'run':
                 return $query->where('category_id', Activity::RUN);
             default:
                 return $query;
@@ -39,11 +39,11 @@ class ActivityBLL extends BaseBLL implements ActivityBLLInterface
         ])->where('user_id', Auth::user()->id);
 
         switch ($tab) {
-            case 'hike?draw=1':
+            case 'hike':
                 return $query->where('category_id', Activity::HIKE);
-            case 'bike?draw=1':
+            case 'bike':
                 return $query->where('category_id', Activity::BIKE);
-            case 'run?draw=1':
+            case 'run':
                 return $query->where('category_id', Activity::RUN);
             default:
                 return $query;

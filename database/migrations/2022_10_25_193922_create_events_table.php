@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
             $table->date('date');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('organization_id');
-            $table->string('description');
+            $table->text('description');
             $table->string('guide');
             $table->string('contact');
             $table->timestamps();

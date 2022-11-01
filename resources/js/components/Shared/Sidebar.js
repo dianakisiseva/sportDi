@@ -4,6 +4,7 @@ import {withTranslation} from 'react-i18next';
 import {IconBurger} from "../Icons";
 import {IconAddressBook, IconExchange, IconInfo, IconMenuDashboard, IconStarFilled} from "../Icons/Icons";
 import {ROLE, ROLES} from "./Constants";
+import {InertiaLink} from "@inertiajs/inertia-react";
 
 class Sidebar extends Component {
     constructor(props) {
@@ -81,7 +82,7 @@ class Sidebar extends Component {
                                 </Link>
                             </li>
                         }
-                        {isAdmin || isSportsman &&
+                        {(isAdmin || isSportsman) &&
                         <li className="side-menu-nav-categories-extended">
                             <div className="side-menu-nav-categories-prime">
                                 <div className="side-menu-nav-categories-icon">
@@ -100,7 +101,8 @@ class Sidebar extends Component {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href={route(this.props.menu.links.activities, {tab: 'hike'})}>
+                                    <Link href={this.props.menu.links.activities}
+                                          data={{tab: "hike"}}>
                                         <span>Hikes</span>
                                     </Link>
                                 </li>

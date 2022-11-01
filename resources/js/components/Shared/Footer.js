@@ -10,9 +10,7 @@ const  Footer = (props) =>{
             {
                 (props.url.current!=="general-conditions")?
                 <footer id="footer" className="footer">
-                    <Link href={props.menu.links.general_terms}>
-                        <span>{t("common.label.general-terms")}</span>
-                    </Link>
+
                 </footer>
                 :null
             }

@@ -35,7 +35,7 @@ class DashboardController extends Controller
 
 
             ],
-            'organizations' => $this->organizationBLL->get(),
+            'organizations' => $this->organizationBLL->getDashboardOrganizations(),
             'events' => $this->eventBLL->get()
         ]);
     }

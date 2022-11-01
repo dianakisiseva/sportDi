@@ -34,6 +34,16 @@ class OrganizationBLL extends BaseBLL implements OrganizationBLLInterface
         ]);
     }
 
+    public function getDashboardOrganizations()
+    {
+        $organizations = $this->DAL->get();
+
+        if($organizations->count() > 3){
+            return $this->DAL->get()->random(3);
+        }
+        return $organizations;
+    }
+
     public function getOrganizationByLogin($login)
     {
         return $this->DAL->getOrganizationByLogin($login);

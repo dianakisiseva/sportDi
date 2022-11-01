@@ -55,20 +55,20 @@ class ActivityController extends Controller
         ]);
     }
 
-    public function getAllActivities()
+    public function getAllActivities($tab)
     {
         $this->authorize('index', [Activity::class]);
 
-        $activities = $this->activityBLL->getAllActivities(request()->get('tab'));
+        $activities = $this->activityBLL->getAllActivities($tab);
 
         return DataTables::eloquent($activities)->make(true);
     }
 
-    public function getMyActivities()
+    public function getMyActivities($tab)
     {
         $this->authorize('index', [Activity::class]);
 
-        $activities = $this->activityBLL->getMyActivities(request()->get('tab'));
+        $activities = $this->activityBLL->getMyActivities($tab);
 
         return DataTables::eloquent($activities)->make(true);
     }
@@ -81,7 +81,7 @@ class ActivityController extends Controller
             'activity' => $activity,
             'links' => [
                 'edit' => route('activities.edit', $activity),
-                'index' => route('activities.index')
+                'index' => route('activities.index', ['tab' => 'all'])
             ]
         ]);
     }
@@ -117,7 +117,7 @@ class ActivityController extends Controller
 
         $this->activityBLL->create($data);
 
-        return redirect()->route('activities.index')
+        return redirect()->route('activities.index', ['tab' => 'all'])
             ->with('success', 'Activity successfully created!');
     }
 

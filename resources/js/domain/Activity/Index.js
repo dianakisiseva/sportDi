@@ -1,19 +1,18 @@
 import React, {useMemo, useRef} from 'react'
-import {DataTable, ReactModal, SelectColumnFilter} from '../../components'
+import {DataTable, ReactModal} from '../../components'
 import {InertiaLink} from '@inertiajs/inertia-react'
 import Layout from '../../components/Shared/Layout'
 import {IconDeleteBin, IconPen, IconShape} from "../../components/Icons/Icons";
 import {route} from "../../utils";
 import {useToasts} from "react-toast-notifications";
 import {CATEGORIES, ROLE} from "../../components/Shared/Constants";
-import IconTrash from "../../components/Icons/IconTrash";
 import DeleteActivity from "./DeleteActivity";
 
 
 const Index = (props) => {
     const modalRef = useRef()
     const tableRef = useRef()
-    const {links, categories, auth} = props
+    const {links, auth} = props
     const {addToast} = useToasts()
     const isAdmin = auth.user.role_id === ROLE.ADMIN;
 

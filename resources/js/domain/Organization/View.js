@@ -97,15 +97,14 @@ export default function View(props) {
                                 <h3>City</h3>
                                 <p>{organization.city}</p>
                             </div>
-                            {organization.facebook && <>
-                                <div className="form-element-full">
-                                    <h3>Facebook link</h3>
-                                    <a href={organization.facebook}>{organization.name}</a>
-                                </div>
-                            </>}
                         </div>
                     </div>
-
+                    {organization.facebook && <>
+                        <div className="form-element-full">
+                            <h3>Facebook link</h3>
+                            <a href={organization.facebook}>{organization.name}</a>
+                        </div>
+                    </>}
                     {organization.description && <>
                         <div className="form-element-full">
                             <h3>Organization description</h3>

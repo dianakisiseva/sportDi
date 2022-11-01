@@ -101,9 +101,9 @@ class RegisterController extends Controller
             }
 
         } catch (\Exception $e) {
-            return redirect()->route('register.user')
+            return redirect()->route('login')
                 ->withErrors(
-                    $e->validator->messages(),
+                    $e->messages(),
                 );
         }
 

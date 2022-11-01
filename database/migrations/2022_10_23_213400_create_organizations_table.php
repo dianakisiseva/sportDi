@@ -21,7 +21,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('city');
             $table->string('logo')->nullable();
             $table->string('facebook')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('password');
             $table->timestamps();
 

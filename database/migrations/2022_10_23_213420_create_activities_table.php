@@ -26,7 +26,7 @@ class CreateActivitiesTable extends Migration
             $table->string('personal_time')->nullable();
             $table->unsignedBigInteger('organization_id')->nullable();
             $table->string("photo")->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')

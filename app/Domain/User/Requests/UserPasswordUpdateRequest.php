@@ -32,7 +32,8 @@ class UserPasswordUpdateRequest extends FormRequest
                     }
                 },
             ],
-            'password' => 'required|confirmed|string|min:8'
+            'password' => 'required|string|min:8',
+            'password_confirmation' => 'required|same:password'
         ];
     }
 }

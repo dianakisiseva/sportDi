@@ -130,25 +130,25 @@ export default function View(props) {
                         class: 'col-6'
                     }
                 },
-                {
-                    element: "checkbox",
-                    name: "organized_by",
-                    label: 'Is it this activity organized by Organization?',
-                    value: !!activity.organization_id,
-                    wrapper: {
-                        element: "div",
-                        class: "col-6 input-checkbox"
-                    }
-                },
-                {
-                    element: "text",
-                    text: '',
-                    name: 'placeholder',
-                    wrapper: {
-                        element: 'div',
-                        class: 'col-6'
-                    }
-                },
+                // {
+                //     element: "checkbox",
+                //     name: "organized_by",
+                //     label: 'Is it this activity organized by Organization?',
+                //     value: !!activity.organization_id,
+                //     wrapper: {
+                //         element: "div",
+                //         class: "col-6 input-checkbox"
+                //     }
+                // },
+                // {
+                //     element: "text",
+                //     text: '',
+                //     name: 'placeholder',
+                //     wrapper: {
+                //         element: 'div',
+                //         class: 'col-6'
+                //     }
+                // },
                 {
                     element: 'input',
                     type: 'text',
