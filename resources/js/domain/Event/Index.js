@@ -141,8 +141,8 @@ const Index = (props) => {
                                          href={route(links.show, {event: row.original.id})}>
                                 <IconShape/>
                             </InertiaLink>
-                            {auth.user.role_id === ROLE.ADMIN ||
-                                auth.user.email === row.original.organization.email && <>
+                            {(auth.user.role_id === ROLE.ADMIN ||
+                                auth.user.email === row.original.organization.email) && <>
                             <InertiaLink className="btn-stripped"
                                          href={route(links.edit, {event: row.original.id})}>
                                 <IconPen/>

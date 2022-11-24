@@ -10,13 +10,13 @@ import {format} from "date-fns";
 import moment from "moment";
 import {formatDate} from "../../utils";
 import {CATEGORIES} from "../../components/Shared/Constants";
+import BackButton from "../../components/BackButton/BackButton";
 
 export default function View(props) {
     const {t} = useTranslation();
     const {event, links, auth, categories} = props;
     const {addToast} = useToasts()
 
-    console.log(event)
     const formData = useMemo(
         () => ({
             form: {
@@ -153,6 +153,10 @@ export default function View(props) {
 
 
     return  <Layout {...props}>
+        <BackButton
+            label='Back to all events'
+            link={links.index}
+        />
         <div className="container-data profile">
             <div className="container-data-header">
                 <h5>Edit</h5>

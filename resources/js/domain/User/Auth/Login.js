@@ -105,7 +105,7 @@ export default function Login(props){
 
             <div className="auth-block-footer">
                 <button className="btn-tertiary"  onClick={() => register()}>Register</button>
-                <InertiaLink className="text-center mt-4 text-underline" href='#'>Forgot my password</InertiaLink>
+                {/*<InertiaLink className="text-center mt-4 text-underline" href='#'>Forgot my password</InertiaLink>*/}
             </div>
         </div>
 
